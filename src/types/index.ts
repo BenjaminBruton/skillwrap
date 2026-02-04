@@ -15,7 +15,7 @@ export interface Camp {
 export interface Session {
   id: string
   camp_id: string
-  session_number: number
+  week_number: number
   time_slot: 'morning' | 'afternoon'
   start_date: string
   end_date: string
@@ -27,6 +27,10 @@ export interface Session {
   created_at: string
   updated_at: string
   camp?: Camp
+  // Extended properties for availability
+  available_spots?: number
+  is_available?: boolean
+  is_full?: boolean
 }
 
 export interface Booking {

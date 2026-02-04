@@ -6,103 +6,79 @@ const camps = [
     id: 1,
     name: 'Software Dev: AI-Powered Productivity',
     slug: 'software-dev-ai',
-    shortDescription: 'Build AI apps and productivity tools',
-    description: 'Learn to build AI-powered applications and productivity tools using modern frameworks and machine learning APIs. Students will work with cutting-edge AI technologies to create practical solutions.',
-    price: 299,
-    ageRange: '13-17',
+    shortDescription: 'Transition from AI "users" to "builders" with cutting-edge tools',
+    description: 'In this forward-looking program, students transition from "users" of AI to "builders" with it, mastering the tools that are currently redefining the software industry. Participants will learn to leverage Large Language Models (LLMs) and agentic frameworks to accelerate their coding workflow, focusing on prompt engineering, automated debugging, and integrating AI APIs into functional Python applications. By the end of the week, students will have built an AI-driven personal assistant or productivity bot, gaining a high-level understanding of the intersection between traditional logic and modern generative technology.',
+    price: 350,
+    ageRange: '13-18',
     icon: CodeBracketIcon,
     color: 'from-blue-500 to-purple-600',
     features: [
-      'AI API Integration',
-      'Modern JavaScript Frameworks',
-      'Machine Learning Basics',
-      'Productivity App Development',
-      'Real-world Projects'
+      'LLM Integration',
+      'Prompt Engineering',
+      'AI-Powered Debugging',
+      'Python Applications',
+      'Personal AI Assistant'
     ]
   },
   {
     id: 2,
     name: 'Full-Stack Dev: The Startup Prototype',
     slug: 'fullstack-startup',
-    shortDescription: 'Build a complete web app from scratch',
-    description: 'Create a complete web application from concept to deployment, learning both frontend and backend development. Perfect for aspiring entrepreneurs and developers.',
-    price: 349,
-    ageRange: '14-18',
+    shortDescription: 'Build a complete MVP from concept to deployment',
+    description: 'Designed for the aspiring "solopreneur" or engineer, this camp mirrors the professional lifecycle of a modern web application. Students dive into the full stack—from designing responsive user interfaces with React and Tailwind CSS to managing cloud-based databases with tools like Supabase. The week is centered on building a "Minimum Viable Product" (MVP) for a real-world problem, teaching students how to handle user authentication, data persistence, and live deployment.',
+    price: 350,
+    ageRange: '13-18',
     icon: RocketLaunchIcon,
     color: 'from-green-500 to-blue-600',
     features: [
-      'Frontend Development',
-      'Backend APIs',
-      'Database Design',
+      'React & Tailwind CSS',
+      'Cloud Databases',
       'User Authentication',
-      'Deployment Strategies'
+      'MVP Development',
+      'Live Deployment'
     ]
   },
   {
     id: 3,
     name: 'Entrepreneurship: Little Shark Tank',
     slug: 'entrepreneurship-shark-tank',
-    shortDescription: 'Pitch your startup idea like on Shark Tank',
-    description: 'Develop business ideas, create pitches, and present to a panel of judges in our mini Shark Tank competition. Learn the fundamentals of entrepreneurship and business development.',
-    price: 199,
-    ageRange: '12-16',
+    shortDescription: 'From lightbulb moment to live investor pitch',
+    description: 'This immersive camp takes students through the high-stakes journey of a startup founder, from the initial "lightbulb moment" to a live investor pitch. Participants will learn the fundamentals of market research, product prototyping, and financial modeling (calculating profit margins and "burn rates") while developing a brand identity and marketing strategy. The program culminates in a "Shark Tank" style finale where students present their polished business plans to a panel of judges, honing the critical soft skills of public speaking, negotiation, and resilience.',
+    price: 300,
+    ageRange: '10-18',
     icon: TrophyIcon,
     color: 'from-yellow-500 to-red-600',
     features: [
-      'Business Plan Development',
       'Market Research',
-      'Pitch Presentation Skills',
-      'Financial Planning',
-      'Investor Relations'
+      'Financial Modeling',
+      'Brand Development',
+      'Investor Pitching',
+      'Public Speaking'
     ]
   },
   {
     id: 4,
-    name: 'Esports Academy',
+    name: 'Esports Academy: The Business of Play',
     slug: 'esports-academy',
-    shortDescription: 'Master competitive gaming and streaming',
-    description: 'Master competitive gaming strategies, team coordination, and streaming while learning about the esports industry. Develop skills in both playing and content creation.',
-    price: 249,
-    ageRange: '13-17',
+    shortDescription: 'Explore the multi-billion dollar esports ecosystem',
+    description: 'Going far beyond the controller, this academy explores the multi-billion dollar ecosystem of the global Esports industry. Students will analyze the various professional pathways available, including tournament organization, broadcast production (using OBS and shoutcasting), team management, and digital branding. While incorporating high-level gameplay and strategic VOD reviews, the focus remains on the professional skills required to run an organization, providing students with a holistic view of how their passion for gaming translates into a viable career in sports and entertainment.',
+    price: 300,
+    ageRange: '10-18',
     icon: ComputerDesktopIcon,
     color: 'from-purple-500 to-pink-600',
     features: [
-      'Competitive Gaming Strategies',
-      'Team Coordination',
-      'Streaming Setup',
-      'Content Creation',
-      'Industry Insights'
+      'Tournament Organization',
+      'Broadcast Production',
+      'Team Management',
+      'Digital Branding',
+      'Strategic Analysis'
     ]
   },
 ]
 
 export default function CampsPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
-      {/* Header */}
-      <header className="container mx-auto px-4 py-6">
-        <nav className="flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">SW</span>
-            </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              SKILLWRAP
-            </span>
-          </Link>
-          <div className="flex items-center space-x-4">
-            <Link href="/" className="text-gray-600 hover:text-gray-900 transition-colors">
-              Home
-            </Link>
-            <Link href="/sign-in" className="text-gray-600 hover:text-gray-900 transition-colors">
-              Sign In
-            </Link>
-            <Link href="/sign-up" className="btn-primary">
-              Get Started
-            </Link>
-          </div>
-        </nav>
-      </header>
+    <div className="min-h-screen">
 
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-16 text-center">
