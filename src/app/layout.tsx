@@ -20,6 +20,14 @@ export const metadata: Metadata = {
   authors: [{ name: 'SKILLWRAP' }],
   creator: 'SKILLWRAP',
   publisher: 'SKILLWRAP',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '32x32', type: 'image/x-icon' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: '/favicon.ico',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
