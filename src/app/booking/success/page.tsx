@@ -57,8 +57,8 @@ function SuccessContent() {
         <div className="mt-6 text-center">
           <p className="text-sm text-gray-500">
             Need help? Contact us at{' '}
-            <a href="mailto:support@skillwrap.com" className="text-blue-600 hover:underline">
-              support@skillwrap.com
+            <a href="mailto:ben@skillwrap.com" className="text-blue-600 hover:underline">
+              ben@skillwrap.com
             </a>
           </p>
         </div>

@@ -88,12 +88,12 @@ export default function HomePage() {
               <div className="text-gray-600">Specialized Camps</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-green-600 mb-2">16</div>
+              <div className="text-3xl font-bold text-green-600 mb-2">20</div>
               <div className="text-gray-600">Sessions Available</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-purple-600 mb-2">20</div>
-              <div className="text-gray-600">Max Students per Camp</div>
+              <div className="text-3xl font-bold text-purple-600 mb-2">12-20</div>
+              <div className="text-gray-600">Max Students per Session</div>
             </div>
             <div>
               <div className="text-3xl font-bold text-red-600 mb-2">5</div>
@@ -198,16 +198,26 @@ export default function HomePage() {
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold mb-4">Support</h4>
+              <h4 className="font-semibold mb-4">Partners</h4>
               <ul className="space-y-2 text-gray-400">
-                <li><Link href="/help" className="hover:text-white transition-colors">Help Center</Link></li>
-                <li><Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
-                <li><Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link></li>
+                <li>
+                  <a
+                    href="https://nexuswaco.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white transition-colors"
+                  >
+                    Nexus Esports
+                  </a>
+                </li>
               </ul>
+              <p className="text-sm text-gray-500 mt-2">
+                Proud partner in esports education
+              </p>
             </div>
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 SKILLWRAP. All rights reserved.</p>
+            <p>&copy; 2026 SKILLWRAP. All rights reserved.</p>
           </div>
         </div>
       </footer>

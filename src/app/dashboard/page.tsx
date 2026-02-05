@@ -330,17 +330,56 @@ export default async function DashboardPage() {
                           Complete Payment
                         </button>
                       )}
-                      {booking.booking_status === 'confirmed' && (
-                        <button className="text-red-600 hover:text-red-700 font-medium text-sm">
-                          Cancel Booking
-                        </button>
-                      )}
                     </div>
                   </div>
                 </div>
               ))}
             </div>
           )}
+        </div>
+
+        {/* Cancellation Policy */}
+        <div className="mt-12">
+          <h2 className="text-xl font-semibold text-gray-900 mb-6">Cancellation Policy</h2>
+          <div className="card p-6">
+            <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-4">
+              <div className="flex">
+                <div className="flex-shrink-0">
+                  <XCircleIcon className="h-5 w-5 text-amber-400" />
+                </div>
+                <div className="ml-3">
+                  <h3 className="text-sm font-medium text-amber-800">
+                    Cancellation Policy
+                  </h3>
+                  <div className="mt-2 text-sm text-amber-700">
+                    <ul className="list-disc list-inside space-y-1">
+                      <li><strong>Full refund:</strong> Up to 2 weeks before camp starts</li>
+                      <li><strong>50% refund:</strong> Up to 1 week before camp starts</li>
+                      <li><strong>Transfer option:</strong> You can transfer to another session instead of cancelling</li>
+                      <li><strong>Less than 1 week:</strong> No refunds, but transfers may still be available</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="text-center">
+              <p className="text-gray-600 mb-4">
+                Need to cancel or transfer a booking? Please contact us directly:
+              </p>
+              <div className="inline-flex items-center justify-center px-4 py-2 bg-blue-50 border border-blue-200 rounded-lg">
+                <div className="text-center">
+                  <p className="text-sm font-medium text-blue-900">Contact for Cancellations</p>
+                  <a
+                    href="mailto:ben@skillwrap.com"
+                    className="text-blue-600 hover:text-blue-700 font-medium"
+                  >
+                    ben@skillwrap.com
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Quick Actions */}

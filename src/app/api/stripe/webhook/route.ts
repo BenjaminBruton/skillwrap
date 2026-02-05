@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { stripe } from '@/lib/stripe'
 import { supabaseAdmin } from '@/lib/supabase'
+import { clerkClient } from '@clerk/nextjs/server'
 import fs from 'fs'
 import path from 'path'
 
@@ -80,6 +81,9 @@ async function handlePaymentSuccess(paymentIntent: any) {
   console.log(`👶 Student: ${studentName}, Age: ${studentAge}`)
 
   try {
+    // First, ensure user exists in Supabase (auto-sync if missing)
+    await ensureUserExists(userId, parentEmail)
+    
     // Try to create booking in database first
     let booking = null
     try {
@@ -225,5 +229,58 @@ async function storeBookingLocally(booking: any) {
     console.log(`Booking stored locally for user ${booking.user_id}`)
   } catch (error) {
     console.error('Failed to store booking locally:', error)
+  }
+}
+
+// Ensure user exists in Supabase, create if missing
+async function ensureUserExists(clerkUserId: string, email: string) {
+  console.log(`🔍 Checking if user exists in Supabase: ${clerkUserId}`)
+  
+  try {
+    // Check if user already exists
+    const { data: existingUser, error: checkError } = await supabaseAdmin
+      .from('users')
+      .select('clerk_user_id')
+      .eq('clerk_user_id', clerkUserId)
+      .single()
+    
+    if (existingUser) {
+      console.log('✅ User already exists in Supabase')
+      return
+    }
+    
+    if (checkError && checkError.code !== 'PGRST116') { // PGRST116 = no rows returned
+      console.error('❌ Error checking user existence:', checkError)
+      throw checkError
+    }
+    
+    console.log('👤 User not found, fetching from Clerk and creating...')
+    
+    // Fetch user details from Clerk
+    const clerkUser = await clerkClient.users.getUser(clerkUserId)
+    
+    // Create user in Supabase
+    const { data, error } = await supabaseAdmin
+      .from('users')
+      .insert({
+        clerk_user_id: clerkUserId,
+        email: clerkUser.emailAddresses[0]?.emailAddress || email,
+        first_name: clerkUser.firstName || '',
+        last_name: clerkUser.lastName || '',
+        phone: clerkUser.phoneNumbers[0]?.phoneNumber || null,
+        role: 'parent'
+      })
+    
+    if (error) {
+      console.error('❌ Failed to create user in Supabase:', error)
+      throw error
+    }
+    
+    console.log('✅ User created successfully in Supabase')
+    
+  } catch (error) {
+    console.error('💥 Error ensuring user exists:', error)
+    // Don't throw - we want booking to proceed even if user sync fails
+    console.log('⚠️ Continuing with booking despite user sync failure')
   }
 }

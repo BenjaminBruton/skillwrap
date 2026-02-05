@@ -10,6 +10,8 @@ const camps = [
     description: 'In this forward-looking program, students transition from "users" of AI to "builders" with it, mastering the tools that are currently redefining the software industry. Participants will learn to leverage Large Language Models (LLMs) and agentic frameworks to accelerate their coding workflow, focusing on prompt engineering, automated debugging, and integrating AI APIs into functional Python applications. By the end of the week, students will have built an AI-driven personal assistant or productivity bot, gaining a high-level understanding of the intersection between traditional logic and modern generative technology.',
     price: 350,
     ageRange: '13-18',
+    maxStudents: 12,
+    sessionsAvailable: 5,
     icon: CodeBracketIcon,
     color: 'from-blue-500 to-purple-600',
     features: [
@@ -28,6 +30,8 @@ const camps = [
     description: 'Designed for the aspiring "solopreneur" or engineer, this camp mirrors the professional lifecycle of a modern web application. Students dive into the full stack—from designing responsive user interfaces with React and Tailwind CSS to managing cloud-based databases with tools like Supabase. The week is centered on building a "Minimum Viable Product" (MVP) for a real-world problem, teaching students how to handle user authentication, data persistence, and live deployment.',
     price: 350,
     ageRange: '13-18',
+    maxStudents: 12,
+    sessionsAvailable: 5,
     icon: RocketLaunchIcon,
     color: 'from-green-500 to-blue-600',
     features: [
@@ -46,6 +50,8 @@ const camps = [
     description: 'This immersive camp takes students through the high-stakes journey of a startup founder, from the initial "lightbulb moment" to a live investor pitch. Participants will learn the fundamentals of market research, product prototyping, and financial modeling (calculating profit margins and "burn rates") while developing a brand identity and marketing strategy. The program culminates in a "Shark Tank" style finale where students present their polished business plans to a panel of judges, honing the critical soft skills of public speaking, negotiation, and resilience.',
     price: 300,
     ageRange: '10-18',
+    maxStudents: 20,
+    sessionsAvailable: 5,
     icon: TrophyIcon,
     color: 'from-yellow-500 to-red-600',
     features: [
@@ -64,6 +70,8 @@ const camps = [
     description: 'Going far beyond the controller, this academy explores the multi-billion dollar ecosystem of the global Esports industry. Students will analyze the various professional pathways available, including tournament organization, broadcast production (using OBS and shoutcasting), team management, and digital branding. While incorporating high-level gameplay and strategic VOD reviews, the focus remains on the professional skills required to run an organization, providing students with a holistic view of how their passion for gaming translates into a viable career in sports and entertainment.',
     price: 300,
     ageRange: '10-18',
+    maxStudents: 20,
+    sessionsAvailable: 5,
     icon: ComputerDesktopIcon,
     color: 'from-purple-500 to-pink-600',
     features: [
@@ -86,9 +94,62 @@ export default function CampsPage() {
           Summer Tech Camps
         </h1>
         <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-          Choose from our specialized week-long camps designed to give kids and teens 
-          real-world tech skills through hands-on projects and expert mentorship.
+          Choose from our specialized week-long camps designed to give kids and teens
+          real-world tech skills through hands-on projects and expert mentorship. 
         </p>
+        <p className="text-xl text-gray-500 mb-12">
+          <strong>20 sessions available</strong> across 4 different camps this summer.
+        </p>
+      </section>
+
+      {/* Partnership Section */}
+      <section className="container mx-auto px-4 py-12">
+        <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-2xl p-8">
+          <div className="flex items-center justify-center space-x-12 mb-6">
+            {/* SKILLWRAP Logo */}
+            <div className="flex items-center space-x-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
+                <span className="text-white font-bold text-xl">SW</span>
+              </div>
+              <span className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                SKILLWRAP
+              </span>
+            </div>
+            
+            {/* Partnership Symbol */}
+            <div className="text-4xl font-bold text-purple-600">×</div>
+            
+            {/* Nexus Esports Logo */}
+            <div className="flex items-center space-x-4">
+              <img
+                src="/images/nexus_logo.png"
+                alt="Nexus Esports Logo"
+                className="w-38 h-20 object-contain"
+              />
+              {/* <span className="text-3xl font-bold text-gray-900">
+                Nexus Esports
+              </span> */}
+            </div>
+          </div>
+          
+          <div className="text-center">
+            <p className="text-gray-600 max-w-2xl mx-auto mb-6">
+              Proud to collaborate with Nexus Esports to bring you world-class gaming and esports education.
+              Together, we're creating the next generation of tech-savvy gamers and developers.
+            </p>
+            <a
+              href="https://nexuswaco.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-6 py-3 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-700 transition-colors"
+            >
+              Visit Nexus Esports
+              <svg className="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          </div>
+        </div>
       </section>
 
       {/* Camps Grid */}
@@ -109,11 +170,25 @@ export default function CampsPage() {
                     <p className="text-gray-600 mb-4">
                       {camp.description}
                     </p>
-                    <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center justify-between mb-4">
                       <span className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
                         Ages {camp.ageRange}
                       </span>
                       <span className="text-3xl font-bold text-gray-900">${camp.price}</span>
+                    </div>
+                    <div className="flex items-center justify-between mb-6 text-sm text-gray-600">
+                      <span className="flex items-center">
+                        <svg className="w-4 h-4 mr-1 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        {camp.sessionsAvailable} Sessions Available
+                      </span>
+                      <span className="flex items-center">
+                        <svg className="w-4 h-4 mr-1 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        Max {camp.maxStudents} Students
+                      </span>
                     </div>
                     <div className="mb-6">
                       <h4 className="font-semibold text-gray-900 mb-3">What You'll Learn:</h4>

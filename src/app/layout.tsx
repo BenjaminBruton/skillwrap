@@ -57,8 +57,11 @@ export default function RootLayout({
                   </span>
                 </Link>
                 <div className="flex items-center space-x-4">
+                  <Link href="/after-school" className="text-gray-600 hover:text-gray-900 transition-colors">
+                    After School
+                  </Link>
                   <Link href="/camps" className="text-gray-600 hover:text-gray-900 transition-colors">
-                    Camps
+                    Summer Camps
                   </Link>
                   <SignedOut>
                     <SignInButton mode="modal">
