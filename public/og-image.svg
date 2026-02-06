@@ -1,0 +1,51 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#dbeafe;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#ffffff;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#dcfce7;stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#9333ea;stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#9333ea;stop-opacity:1" />
+        </linearGradient>
+    </defs>
+
+    <!-- Background -->
+    <rect width="1200" height="630" fill="url(#bgGradient)" />
+
+    <!-- Main Content Container -->
+    <g transform="translate(600, 315)">
+        <!-- Logo and Text Container -->
+        <g transform="translate(-200, -50)">
+            <!-- SW Logo Box -->
+            <rect x="0" y="0" width="100" height="100" rx="16" fill="url(#logoGradient)" />
+            <text x="50" y="65" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="white"
+                text-anchor="middle">SW</text>
+
+            <!-- SKILLWRAP Text -->
+            <text x="130" y="70" font-family="Arial, sans-serif" font-size="72" font-weight="bold"
+                fill="url(#textGradient)">SKILLWRAP</text>
+        </g>
+
+        <!-- Tagline -->
+        <text x="0" y="100" font-family="Arial, sans-serif" font-size="32" fill="#4b5563" text-anchor="middle">Tech
+            Summer Camps for Kids &amp; Teens</text>
+
+        <!-- Features -->
+        <g transform="translate(0, 150)">
+            <text x="-200" y="0" font-family="Arial, sans-serif" font-size="24" fill="#6b7280"
+                text-anchor="middle">Programming</text>
+            <text x="-50" y="0" font-family="Arial, sans-serif" font-size="24" fill="#6b7280" text-anchor="middle">AI
+                &amp; Machine Learning</text>
+            <text x="120" y="0" font-family="Arial, sans-serif" font-size="24" fill="#6b7280"
+                text-anchor="middle">Entrepreneurship</text>
+            <text x="300" y="0" font-family="Arial, sans-serif" font-size="24" fill="#6b7280"
+                text-anchor="middle">Esports</text>
+        </g>
+    </g>
+</svg>

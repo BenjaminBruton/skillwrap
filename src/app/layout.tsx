@@ -35,11 +35,20 @@ export const metadata: Metadata = {
     title: 'SKILLWRAP - Tech Summer Camps',
     description: 'Join our exciting tech summer camps and learn programming, AI, entrepreneurship, and esports!',
     siteName: 'SKILLWRAP',
+    images: [
+      {
+        url: '/og-image.svg',
+        width: 1200,
+        height: 630,
+        alt: 'SKILLWRAP - Tech Summer Camps for Kids & Teens',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'SKILLWRAP - Tech Summer Camps',
     description: 'Join our exciting tech summer camps and learn programming, AI, entrepreneurship, and esports!',
+    images: ['/og-image.svg'],
   },
 }
 

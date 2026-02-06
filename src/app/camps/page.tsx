@@ -105,29 +105,29 @@ export default function CampsPage() {
       {/* Partnership Section */}
       <section className="container mx-auto px-4 py-12">
         <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-2xl p-8">
-          <div className="flex items-center justify-center space-x-12 mb-6">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 lg:gap-12 mb-6">
             {/* SKILLWRAP Logo */}
-            <div className="flex items-center space-x-4">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold text-xl">SW</span>
+            <div className="flex items-center space-x-2 sm:space-x-4">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
+                <span className="text-white font-bold text-lg sm:text-xl">SW</span>
               </div>
-              <span className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <span className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 SKILLWRAP
               </span>
             </div>
             
             {/* Partnership Symbol */}
-            <div className="text-4xl font-bold text-purple-600">×</div>
+            <div className="text-2xl sm:text-4xl font-bold text-purple-600">×</div>
             
             {/* Nexus Esports Logo/Text */}
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center justify-center">
               {/* Show logo on desktop, text on mobile */}
               <img
                 src="/images/nexus_logo.png"
                 alt="Nexus Esports Logo"
-                className="hidden sm:block w-38 h-20 object-contain"
+                className="hidden sm:block w-32 sm:w-38 h-16 sm:h-20 object-contain"
               />
-              <span className="block sm:hidden text-2xl md:text-3xl font-bold text-gray-900">
+              <span className="block sm:hidden text-xl font-bold text-gray-900 text-center">
                 Nexus Esports
               </span>
             </div>
@@ -177,7 +177,7 @@ export default function CampsPage() {
                       </span>
                       <span className="text-3xl font-bold text-gray-900">${camp.price}</span>
                     </div>
-                    <div className="flex items-center justify-between mb-6 text-sm text-gray-600">
+                    <div className="flex items-center justify-between mb-4 text-sm text-gray-600">
                       <span className="flex items-center">
                         <svg className="w-4 h-4 mr-1 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -189,6 +189,14 @@ export default function CampsPage() {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                         </svg>
                         Max {camp.maxStudents} Students
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-center mb-6 text-sm text-gray-600">
+                      <span className="flex items-center bg-blue-50 px-3 py-2 rounded-lg">
+                        <svg className="w-4 h-4 mr-1 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        20 hours of work over 5 days
                       </span>
                     </div>
                     <div className="mb-6">
