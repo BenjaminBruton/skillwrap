@@ -119,16 +119,17 @@ export default function CampsPage() {
             {/* Partnership Symbol */}
             <div className="text-4xl font-bold text-purple-600">×</div>
             
-            {/* Nexus Esports Logo */}
+            {/* Nexus Esports Logo/Text */}
             <div className="flex items-center space-x-4">
+              {/* Show logo on desktop, text on mobile */}
               <img
                 src="/images/nexus_logo.png"
                 alt="Nexus Esports Logo"
-                className="w-38 h-20 object-contain"
+                className="hidden sm:block w-38 h-20 object-contain"
               />
-              {/* <span className="text-3xl font-bold text-gray-900">
+              <span className="block sm:hidden text-2xl md:text-3xl font-bold text-gray-900">
                 Nexus Esports
-              </span> */}
+              </span>
             </div>
           </div>
           
