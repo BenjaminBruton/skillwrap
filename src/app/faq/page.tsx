@@ -108,7 +108,7 @@ const faqData: FAQItem[] = [
   {
     id: 'lunch-snacks',
     question: 'Are lunch and snacks provided?',
-    answer: 'Students are welcome to bring their own snacks and drinks from home. However, we also have the Savepoint Sandwich Shop onsite, offering fresh sandwiches, a variety of chips, candy, chocolates, pastries, and beverages. For full-day students (attending both morning and afternoon sessions), we have a supervised lunch break with comfortable eating areas. Visit <a href="https://savepointsandwichshop.com" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">Savepoint Sandwich Shop</a> to see their full menu.',
+    answer: 'Students are welcome to bring their own snacks and drinks from home. However, we also have the Savepoint Sandwich Shop onsite, offering fresh sandwiches, a variety of chips, candy, chocolates, pastries, and beverages. For full-day students (attending both morning and afternoon sessions), we have a supervised lunch break with comfortable eating areas. Visit <a href="https://savepointsandwich.com/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">Savepoint Sandwich Shop</a> to see their full menu.',
     category: 'Experience'
   },
   {

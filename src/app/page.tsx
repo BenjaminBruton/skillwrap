@@ -210,10 +210,21 @@ export default function HomePage() {
                     Nexus Esports
                   </a>
                 </li>
+                <li>
+                  <a
+                    href="https://savepointsandwich.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white transition-colors"
+                  >
+                    Savepoint Sandwich Shop
+                  </a>
+                </li>
               </ul>
-              <p className="text-sm text-gray-500 mt-2">
-                Proud partner in esports education
-              </p>
+              <div className="text-sm text-gray-500 mt-2 space-y-1">
+                <p>Proud partner in esports education</p>
+                <p>Proud sustenance partner</p>
+              </div>
             </div>
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
