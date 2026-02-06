@@ -7,7 +7,7 @@ import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/outline'
 interface FAQItem {
   id: string
   question: string
-  answer: string
+  answer: string | JSX.Element
   category: string
 }
 
@@ -108,7 +108,20 @@ const faqData: FAQItem[] = [
   {
     id: 'lunch-snacks',
     question: 'Are lunch and snacks provided?',
-    answer: 'Students are welcome to bring their own snacks and drinks from home. However, we also have the Savepoint Sandwich Shop onsite, offering fresh sandwiches, a variety of chips, candy, chocolates, pastries, and beverages. For full-day students (attending both morning and afternoon sessions), we have a supervised lunch break with comfortable eating areas. Visit <a href="https://savepointsandwich.com/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">Savepoint Sandwich Shop</a> to see their full menu.',
+    answer: (
+      <>
+        Students are welcome to bring their own snacks and drinks from home. However, we also have the Savepoint Sandwich Shop onsite, offering fresh sandwiches, a variety of chips, candy, chocolates, pastries, and beverages. For full-day students (attending both morning and afternoon sessions), we have a supervised lunch break with comfortable eating areas. Visit{' '}
+        <a
+          href="https://savepointsandwich.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-600 hover:text-blue-800 underline"
+        >
+          Savepoint Sandwich Shop
+        </a>{' '}
+        to see their full menu.
+      </>
+    ),
     category: 'Experience'
   },
   {
@@ -232,7 +245,13 @@ export default function FAQPage() {
                 {openItems.includes(faq.id) && (
                   <div className="px-6 pb-4">
                     <div className="pl-16">
-                      <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+                      <div className="text-gray-600 leading-relaxed">
+                        {typeof faq.answer === 'string' ? (
+                          <p>{faq.answer}</p>
+                        ) : (
+                          faq.answer
+                        )}
+                      </div>
                     </div>
                   </div>
                 )}

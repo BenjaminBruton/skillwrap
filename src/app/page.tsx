@@ -209,6 +209,7 @@ export default function HomePage() {
                   >
                     Nexus Esports
                   </a>
+                  <p>Proud partner in esports education</p>
                 </li>
                 <li>
                   <a
@@ -219,12 +220,9 @@ export default function HomePage() {
                   >
                     Savepoint Sandwich Shop
                   </a>
+                  <p>Proud sustenance partner</p>
                 </li>
               </ul>
-              <div className="text-sm text-gray-500 mt-2 space-y-1">
-                <p>Proud partner in esports education</p>
-                <p>Proud sustenance partner</p>
-              </div>
             </div>
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
