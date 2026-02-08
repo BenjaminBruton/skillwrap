@@ -59,6 +59,104 @@ const mockBookings = [
   }
 ]
 
+async function getUserForms(userEmail: string) {
+  try {
+    // Fetch all forms submitted by this user's email directly from Supabase
+    const [esportsWaivers, mediaReleases, generalWaivers] = await Promise.all([
+      supabaseAdmin
+        .from('esports_waivers')
+        .select('*')
+        .eq('parent_email', userEmail)
+        .order('submitted_at', { ascending: false }),
+      
+      supabaseAdmin
+        .from('media_releases')
+        .select('*')
+        .eq('parent_email', userEmail)
+        .order('submitted_at', { ascending: false }),
+      
+      supabaseAdmin
+        .from('general_waivers')
+        .select('*')
+        .eq('parent_email', userEmail)
+        .order('submitted_at', { ascending: false })
+    ])
+
+    // Format the forms data
+    const forms: any[] = []
+
+    // Add esports waivers
+    if (esportsWaivers.data) {
+      esportsWaivers.data.forEach(form => {
+        forms.push({
+          id: form.id,
+          type: 'esports-waiver',
+          title: 'Esports Waiver',
+          studentName: form.student_name,
+          submittedAt: form.submitted_at,
+          status: 'completed',
+          details: {
+            age: form.student_age,
+            eRated: form.e_rated_games_authorized,
+            tRated: form.t_rated_games_authorized,
+            mRated: form.m_rated_games_authorized,
+            emergencyContact: form.emergency_contact_name,
+            emergencyPhone: form.emergency_contact_phone
+          }
+        })
+      })
+    }
+
+    // Add media releases
+    if (mediaReleases.data) {
+      mediaReleases.data.forEach(form => {
+        forms.push({
+          id: form.id,
+          type: 'media-release',
+          title: 'Media Release',
+          studentName: form.student_name,
+          submittedAt: form.submitted_at,
+          status: 'completed',
+          details: {
+            age: form.student_age,
+            permissionGranted: form.permission_granted
+          }
+        })
+      })
+    }
+
+    // Add general waivers
+    if (generalWaivers.data) {
+      generalWaivers.data.forEach(form => {
+        forms.push({
+          id: form.id,
+          type: 'general-waiver',
+          title: 'General Camp Waiver',
+          studentName: form.student_name,
+          submittedAt: form.submitted_at,
+          status: 'completed',
+          details: {
+            age: form.student_age,
+            emergencyContact: form.emergency_contact_name,
+            emergencyPhone: form.emergency_contact_phone,
+            medicalConditions: form.medical_conditions,
+            allergies: form.allergies,
+            medications: form.medications
+          }
+        })
+      })
+    }
+
+    // Sort all forms by submission date (newest first)
+    forms.sort((a, b) => new Date(b.submittedAt).getTime() - new Date(a.submittedAt).getTime())
+
+    return forms
+  } catch (error) {
+    console.error('Error fetching user forms:', error)
+    return []
+  }
+}
+
 async function getUserBookings(userId: string) {
   try {
     // Try to fetch from database first using supabaseAdmin to bypass RLS
@@ -139,12 +237,17 @@ async function getUserBookings(userId: string) {
 
 export default async function DashboardPage() {
   const user = await currentUser()
-
+  
   if (!user) {
     redirect('/sign-in')
   }
 
-  const bookings = await getUserBookings(user.id)
+  const userEmail = user.primaryEmailAddress?.emailAddress || ''
+
+  const [bookings, forms] = await Promise.all([
+    getUserBookings(user.id),
+    getUserForms(userEmail)
+  ])
 
   const confirmedBookings = bookings.filter((b: any) => b.booking_status === 'confirmed')
   const pendingBookings = bookings.filter((b: any) => b.payment_status === 'pending')
@@ -380,6 +483,93 @@ export default async function DashboardPage() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Submitted Forms */}
+        <div className="mt-12">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl font-semibold text-gray-900">Submitted Forms</h2>
+            <Link
+              href="/forms"
+              className="text-blue-600 hover:text-blue-700 font-medium"
+            >
+              View All Forms →
+            </Link>
+          </div>
+
+          {forms.length === 0 ? (
+            <div className="text-center py-8">
+              <div className="max-w-md mx-auto">
+                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-medium text-gray-900 mb-2">No Forms Submitted</h3>
+                <p className="text-gray-600 mb-4">You haven't submitted any forms yet.</p>
+                <Link
+                  href="/forms"
+                  className="btn-primary"
+                >
+                  Browse Forms
+                </Link>
+              </div>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {forms.map((form: any) => (
+                <div key={form.id} className="card p-4 hover:shadow-lg transition-shadow">
+                  <div className="flex items-start justify-between mb-3">
+                    <div>
+                      <h3 className="font-medium text-gray-900">{form.title}</h3>
+                      <p className="text-sm text-gray-600">{form.studentName}</p>
+                    </div>
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                      Completed
+                    </span>
+                  </div>
+                  
+                  <div className="space-y-2 text-sm text-gray-600">
+                    <div className="flex justify-between">
+                      <span>Submitted:</span>
+                      <span>{new Date(form.submittedAt).toLocaleDateString()}</span>
+                    </div>
+                    
+                    {form.type === 'esports-waiver' && form.details && (
+                      <div className="pt-2 border-t border-gray-100">
+                        <p className="text-xs text-gray-500 mb-1">Game Ratings Authorized:</p>
+                        <div className="flex gap-1">
+                          {form.details.eRated && <span className="px-1.5 py-0.5 bg-green-100 text-green-700 text-xs rounded">E</span>}
+                          {form.details.tRated && <span className="px-1.5 py-0.5 bg-yellow-100 text-yellow-700 text-xs rounded">T</span>}
+                          {form.details.mRated && <span className="px-1.5 py-0.5 bg-red-100 text-red-700 text-xs rounded">M</span>}
+                        </div>
+                      </div>
+                    )}
+                    
+                    {form.type === 'media-release' && form.details && (
+                      <div className="pt-2 border-t border-gray-100">
+                        <div className="flex justify-between">
+                          <span>Media Permission:</span>
+                          <span className={form.details.permissionGranted ? 'text-green-600' : 'text-red-600'}>
+                            {form.details.permissionGranted ? 'Granted' : 'Denied'}
+                          </span>
+                        </div>
+                      </div>
+                    )}
+                    
+                    {form.type === 'general-waiver' && form.details && (
+                      <div className="pt-2 border-t border-gray-100">
+                        <div className="flex justify-between">
+                          <span>Emergency Contact:</span>
+                          <span className="text-right text-xs">{form.details.emergencyContact}</span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Quick Actions */}

@@ -80,6 +80,9 @@ export default function RootLayout({
                   <Link href="/camps" className="text-gray-600 hover:text-gray-900 transition-colors">
                     Summer Camps
                   </Link>
+                  <Link href="/forms" className="text-gray-600 hover:text-gray-900 transition-colors">
+                    Forms & Waivers
+                  </Link>
                   <SignedOut>
                     <SignInButton mode="modal">
                       <button className="text-gray-600 hover:text-gray-900 transition-colors">
