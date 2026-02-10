@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { ArrowRightIcon, CodeBracketIcon, RocketLaunchIcon, TrophyIcon, ComputerDesktopIcon, PuzzlePieceIcon } from '@heroicons/react/24/outline'
+import { supabase } from '@/lib/supabase'
 
 const camps = [
   {
@@ -52,7 +53,26 @@ const camps = [
   },
 ]
 
-export default function HomePage() {
+async function getSessionCount() {
+  try {
+    const { count, error } = await supabase
+      .from('sessions')
+      .select('*', { count: 'exact', head: true })
+    
+    if (error) {
+      console.error('Error fetching session count:', error)
+      return 20 // fallback to hardcoded value
+    }
+    
+    return count || 20
+  } catch (error) {
+    console.error('Unexpected error fetching session count:', error)
+    return 20 // fallback to hardcoded value
+  }
+}
+
+export default async function HomePage() {
+  const sessionCount = await getSessionCount()
   return (
     <div className="min-h-screen">
 
@@ -88,7 +108,7 @@ export default function HomePage() {
               <div className="text-gray-600">Specialized Camps</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-green-600 mb-2">20</div>
+              <div className="text-3xl font-bold text-green-600 mb-2">{sessionCount}</div>
               <div className="text-gray-600">Sessions Available</div>
             </div>
             <div>
