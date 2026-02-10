@@ -24,17 +24,21 @@ export function formatTime(time: string): string {
 }
 
 export function formatDateRange(startDate: string, endDate: string): string {
-  const start = new Date(startDate)
-  const end = new Date(endDate)
+  // Parse dates as local dates to avoid timezone conversion issues
+  const [startYear, startMonth, startDay] = startDate.split('-').map(Number)
+  const [endYear, endMonth, endDay] = endDate.split('-').map(Number)
   
-  const startMonth = start.toLocaleDateString('en-US', { month: 'short' })
-  const endMonth = end.toLocaleDateString('en-US', { month: 'short' })
+  const start = new Date(startYear, startMonth - 1, startDay) // Month is 0-indexed
+  const end = new Date(endYear, endMonth - 1, endDay)
   
-  if (startMonth === endMonth) {
-    return `${startMonth} ${start.getDate()}-${end.getDate()}, ${start.getFullYear()}`
+  const startMonthName = start.toLocaleDateString('en-US', { month: 'short' })
+  const endMonthName = end.toLocaleDateString('en-US', { month: 'short' })
+  
+  if (startMonthName === endMonthName) {
+    return `${startMonthName} ${start.getDate()}-${end.getDate()}, ${start.getFullYear()}`
   }
   
-  return `${startMonth} ${start.getDate()} - ${endMonth} ${end.getDate()}, ${start.getFullYear()}`
+  return `${startMonthName} ${start.getDate()} - ${endMonthName} ${end.getDate()}, ${start.getFullYear()}`
 }
 
 export function calculateAge(birthDate: string): number {

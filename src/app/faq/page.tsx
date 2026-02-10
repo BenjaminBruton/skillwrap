@@ -22,7 +22,7 @@ const faqData: FAQItem[] = [
   {
     id: 'age-requirements',
     question: 'What are the age requirements for each camp?',
-    answer: 'Our camps are designed for different age groups: Software Development camps (AI-Powered Productivity and Full-Stack Development) are for ages 13-18, while Entrepreneurship and Esports Academy are for ages 10-18. We group students appropriately within these ranges to ensure optimal learning experiences.',
+    answer: 'Our camps are designed for different age groups: Software Development camps (AI-Powered Productivity) are for ages 13-18, while Entrepreneurship, Esports Academy, and Tabletop Gaming are for ages 10-18. We group students appropriately within these ranges to ensure optimal learning experiences.',
     category: 'General'
   },
   {
@@ -42,7 +42,7 @@ const faqData: FAQItem[] = [
   {
     id: 'pricing',
     question: 'How much do the camps cost?',
-    answer: 'Software Development camps (AI-Powered Productivity and Full-Stack Development) are $350 per week. Entrepreneurship and Esports Academy camps are $300 per week. All materials, equipment, and instruction are included in the price.',
+    answer: 'Software Development camps (AI-Powered Productivity) are $300 per week. Entrepreneurship, Esports Academy, and Tabletop Gaming camps are $275 per week. All materials, equipment, and instruction are included in the price.',
     category: 'Enrollment'
   },
   {
@@ -136,12 +136,6 @@ const faqData: FAQItem[] = [
     id: 'ai-camp-details',
     question: 'What will my child learn in the AI-Powered Productivity camp?',
     answer: 'Students learn to integrate Large Language Models (LLMs) into Python applications, master prompt engineering, use AI for automated debugging, and build their own AI-powered personal assistant or productivity bot. They transition from AI "users" to AI "builders."',
-    category: 'Camps'
-  },
-  {
-    id: 'fullstack-camp-details',
-    question: 'What technologies are covered in the Full-Stack Development camp?',
-    answer: 'Students learn React and Tailwind CSS for frontend development, cloud databases with Supabase, user authentication systems, and complete the week by building and deploying a real Minimum Viable Product (MVP) for a problem they choose to solve.',
     category: 'Camps'
   },
   {

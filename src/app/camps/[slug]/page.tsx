@@ -27,19 +27,6 @@ const mockCamps = {
     created_at: '2024-01-01T00:00:00Z',
     updated_at: '2024-01-01T00:00:00Z'
   },
-  'fullstack-startup': {
-    id: '2',
-    name: 'Full-Stack Startup',
-    slug: 'fullstack-startup',
-    description: 'Transform your ideas into reality by building a complete web application from scratch. Students learn modern web development using React, databases, and cloud deployment. By the end of the week, each student will have created and launched their own startup idea as a fully functional web application, complete with user authentication, data management, and professional deployment.',
-    short_description: 'Build and launch your own web application',
-    age_range: '14-18',
-    max_capacity: 12,
-    price: 350,
-    image_url: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2015&q=80',
-    created_at: '2024-01-01T00:00:00Z',
-    updated_at: '2024-01-01T00:00:00Z'
-  },
   'entrepreneurship-shark-tank': {
     id: '3',
     name: 'Entrepreneurship + Shark Tank',
@@ -76,13 +63,6 @@ const mockSessions = [
   { id: '3', camp_id: '1', week_number: 3, time_slot: 'morning', start_date: '2024-06-17', end_date: '2024-06-21', start_time: '08:00:00', end_time: '12:00:00', current_bookings: 5, max_capacity: 12, status: 'open' },
   { id: '4', camp_id: '1', week_number: 5, time_slot: 'afternoon', start_date: '2024-07-01', end_date: '2024-07-05', start_time: '13:00:00', end_time: '17:00:00', current_bookings: 2, max_capacity: 12, status: 'open' },
   { id: '5', camp_id: '1', week_number: 8, time_slot: 'morning', start_date: '2024-07-22', end_date: '2024-07-26', start_time: '08:00:00', end_time: '12:00:00', current_bookings: 12, max_capacity: 12, status: 'full' },
-
-  // Full-Stack Startup Sessions
-  { id: '6', camp_id: '2', week_number: 2, time_slot: 'morning', start_date: '2024-06-10', end_date: '2024-06-14', start_time: '08:00:00', end_time: '12:00:00', current_bookings: 4, max_capacity: 12, status: 'open' },
-  { id: '7', camp_id: '2', week_number: 2, time_slot: 'afternoon', start_date: '2024-06-10', end_date: '2024-06-14', start_time: '13:00:00', end_time: '17:00:00', current_bookings: 7, max_capacity: 12, status: 'open' },
-  { id: '8', camp_id: '2', week_number: 4, time_slot: 'morning', start_date: '2024-06-24', end_date: '2024-06-28', start_time: '08:00:00', end_time: '12:00:00', current_bookings: 6, max_capacity: 12, status: 'open' },
-  { id: '9', camp_id: '2', week_number: 6, time_slot: 'afternoon', start_date: '2024-07-08', end_date: '2024-07-12', start_time: '13:00:00', end_time: '17:00:00', current_bookings: 1, max_capacity: 12, status: 'open' },
-  { id: '10', camp_id: '2', week_number: 9, time_slot: 'morning', start_date: '2024-07-29', end_date: '2024-08-02', start_time: '08:00:00', end_time: '12:00:00', current_bookings: 9, max_capacity: 12, status: 'open' },
 
   // Entrepreneurship Sessions
   { id: '11', camp_id: '3', week_number: 1, time_slot: 'morning', start_date: '2024-06-03', end_date: '2024-06-07', start_time: '08:00:00', end_time: '12:00:00', current_bookings: 8, max_capacity: 20, status: 'open' },
@@ -320,14 +300,6 @@ function getSkillsForCamp(slug: string): string[] {
       'API Integration',
       'Personal AI Assistant Development'
     ],
-    'fullstack-startup': [
-      'React & Component Architecture',
-      'Tailwind CSS Styling',
-      'Database Design & Management',
-      'User Authentication Systems',
-      'API Development',
-      'Deployment & DevOps'
-    ],
     'entrepreneurship-shark-tank': [
       'Market Research & Analysis',
       'Financial Modeling',
@@ -370,12 +342,6 @@ function getFAQForCamp(slug: string) {
       {
         question: "Do students need programming experience?",
         answer: "Basic programming knowledge is helpful but not required. We'll teach Python fundamentals as we build AI applications."
-      }
-    ],
-    'fullstack-startup': [
-      {
-        question: "Will students deploy a real application?",
-        answer: "Yes! By the end of the week, students will have a live web application they can share with friends and family."
       }
     ],
     'entrepreneurship-shark-tank': [

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowRightIcon, CodeBracketIcon, RocketLaunchIcon, TrophyIcon, ComputerDesktopIcon } from '@heroicons/react/24/outline'
+import { ArrowRightIcon, CodeBracketIcon, RocketLaunchIcon, TrophyIcon, ComputerDesktopIcon, PuzzlePieceIcon, CalendarIcon } from '@heroicons/react/24/outline'
 
 const camps = [
   {
@@ -20,26 +20,6 @@ const camps = [
       'AI-Powered Debugging',
       'Python Applications',
       'Personal AI Assistant'
-    ]
-  },
-  {
-    id: 2,
-    name: 'Full-Stack Dev: The Startup Prototype',
-    slug: 'fullstack-startup',
-    shortDescription: 'Build a complete MVP from concept to deployment',
-    description: 'Designed for the aspiring "solopreneur" or engineer, this camp mirrors the professional lifecycle of a modern web application. Students dive into the full stack—from designing responsive user interfaces with React and Tailwind CSS to managing cloud-based databases with tools like Supabase. The week is centered on building a "Minimum Viable Product" (MVP) for a real-world problem, teaching students how to handle user authentication, data persistence, and live deployment.',
-    price: 300,
-    ageRange: '13-18',
-    maxStudents: 12,
-    sessionsAvailable: 5,
-    icon: ComputerDesktopIcon,
-    color: 'from-green-500 to-blue-600',
-    features: [
-      'React & Tailwind CSS',
-      'Cloud Databases',
-      'User Authentication',
-      'MVP Development',
-      'Live Deployment'
     ]
   },
   {
@@ -80,6 +60,26 @@ const camps = [
       'Team Management',
       'Digital Branding',
       'Strategic Analysis'
+    ]
+  },
+  {
+    id: 5,
+    name: 'Tabletop Card Gaming: Collector to Competitor',
+    slug: 'tabletop-gaming',
+    shortDescription: 'Transform your passion for card games into competitive mastery',
+    description: 'Transform your passion for card games into competitive mastery! Learn advanced strategies, deck building, tournament play, and the business side of competitive gaming. Perfect for aspiring professional players and collectors who want to understand the deeper mechanics of their favorite games and develop the skills needed to compete at higher levels.',
+    price: 200,
+    ageRange: '10-18',
+    maxStudents: 20,
+    sessionsAvailable: 4,
+    icon: PuzzlePieceIcon,
+    color: 'from-orange-500 to-red-600',
+    features: [
+      'Advanced Deck Building',
+      'Tournament Strategy',
+      'Card Game Economics',
+      'Meta Analysis',
+      'Professional Gaming Mindset'
     ]
   },
 ]
@@ -150,6 +150,19 @@ export default function CampsPage() {
               </svg>
             </a>
           </div>
+        </div>
+      </section>
+
+      {/* Calendar Link */}
+      <section className="container mx-auto px-4 py-8">
+        <div className="text-center">
+          <Link
+            href="/camps/calendar"
+            className="inline-flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+          >
+            <CalendarIcon className="h-5 w-5" />
+            <span>View Camp Calendar</span>
+          </Link>
         </div>
       </section>
 

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowRightIcon, CodeBracketIcon, RocketLaunchIcon, TrophyIcon, ComputerDesktopIcon } from '@heroicons/react/24/outline'
+import { ArrowRightIcon, CodeBracketIcon, RocketLaunchIcon, TrophyIcon, ComputerDesktopIcon, PuzzlePieceIcon } from '@heroicons/react/24/outline'
 
 const camps = [
   {
@@ -13,18 +13,6 @@ const camps = [
     icon: CodeBracketIcon,
     color: 'from-blue-500 to-purple-600',
     highlights: ['LLM Integration', 'Prompt Engineering', 'AI-Powered Debugging', 'Python Applications', 'Personal AI Assistant']
-  },
-  {
-    id: 2,
-    name: 'Full-Stack Dev: The Startup Prototype',
-    slug: 'fullstack-startup',
-    shortDescription: 'Build a complete MVP from concept to deployment',
-    description: 'Designed for the aspiring "solopreneur" or engineer, this camp mirrors the professional lifecycle of a modern web application. Students dive into the full stack—from designing responsive user interfaces with React and Tailwind CSS to managing cloud-based databases with tools like Supabase. The week is centered on building a "Minimum Viable Product" (MVP) for a real-world problem, teaching students how to handle user authentication, data persistence, and live deployment.',
-    price: 350,
-    ageRange: '13-18',
-    icon: RocketLaunchIcon,
-    color: 'from-green-500 to-blue-600',
-    highlights: ['React & Tailwind CSS', 'Cloud Databases', 'User Authentication', 'MVP Development', 'Live Deployment']
   },
   {
     id: 3,
@@ -49,6 +37,18 @@ const camps = [
     icon: ComputerDesktopIcon,
     color: 'from-purple-500 to-pink-600',
     highlights: ['Tournament Organization', 'Broadcast Production', 'Team Management', 'Digital Branding', 'Strategic Analysis']
+  },
+  {
+    id: 5,
+    name: 'Tabletop Card Gaming: Collector to Competitor',
+    slug: 'tabletop-gaming',
+    shortDescription: 'Transform your passion for card games into competitive mastery',
+    description: 'Transform your passion for card games into competitive mastery! Learn advanced strategies, deck building, tournament play, and the business side of competitive gaming. Perfect for aspiring professional players and collectors who want to understand the deeper mechanics of their favorite games and develop the skills needed to compete at higher levels.',
+    price: 200,
+    ageRange: '10-18',
+    icon: PuzzlePieceIcon,
+    color: 'from-orange-500 to-red-600',
+    highlights: ['Advanced Deck Building', 'Tournament Strategy', 'Card Game Economics', 'Meta Analysis', 'Professional Gaming Mindset']
   },
 ]
 
