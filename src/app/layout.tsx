@@ -33,23 +33,23 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://skillwrap.com',
-    title: 'SKILLWRAP - Tech Summer Camps',
-    description: 'Join our exciting tech summer camps and learn programming, AI, entrepreneurship, and esports!',
+    title: 'Skillwrap - Summer Camps',
+    description: 'Join our exciting tech summer camps and learn AI development, entrepreneurship, esports, and tabletop card gaming!',
     siteName: 'SKILLWRAP',
     images: [
       {
-        url: '/og-image.svg',
+        url: '/og-image.svg?v=2',
         width: 1200,
         height: 630,
-        alt: 'SKILLWRAP - Tech Summer Camps for Kids & Teens',
+        alt: 'Skillwrap - Summer Camps',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'SKILLWRAP - Tech Summer Camps',
-    description: 'Join our exciting tech summer camps and learn programming, AI, entrepreneurship, and esports!',
-    images: ['/og-image.svg'],
+    title: 'Skillwrap - Summer Camps',
+    description: 'Join our exciting tech summer camps and learn AI development, entrepreneurship, esports, and tabletop card gaming!',
+    images: ['/og-image.svg?v=2'],
   },
 }
 
