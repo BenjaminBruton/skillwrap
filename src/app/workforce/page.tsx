@@ -236,22 +236,22 @@ export default function WorkforcePage() {
                   <ChartBarIcon className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-3">Industry-Specific</h3>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-3">Business Function-Specific</h3>
                   <p className="text-gray-600 mb-4">
-                    Customized training programs designed for specific industries and use cases.
+                    Customized training programs designed for specific business functions and operational areas.
                   </p>
                   <ul className="space-y-2">
                     <li className="flex items-center text-sm text-gray-600">
                       <CheckCircleIcon className="h-4 w-4 text-green-500 mr-2" />
-                      Healthcare AI
+                      Marketing Tech & Analytics
                     </li>
                     <li className="flex items-center text-sm text-gray-600">
                       <CheckCircleIcon className="h-4 w-4 text-green-500 mr-2" />
-                      Financial Services
+                      Operations & Process Automation
                     </li>
                     <li className="flex items-center text-sm text-gray-600">
                       <CheckCircleIcon className="h-4 w-4 text-green-500 mr-2" />
-                      Manufacturing & Logistics
+                      Sales & Customer Success Tech
                     </li>
                   </ul>
                 </div>
