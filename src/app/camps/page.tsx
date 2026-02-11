@@ -111,17 +111,16 @@ export default async function CampsPage() {
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-16 text-center">
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-          Summer Tech Camps
+          Summer Camps
         </h1>
         <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
           Choose from our specialized week-long camps designed to give kids and teens
-          real-world tech skills through hands-on projects and expert mentorship. 
+          real-world skills through hands-on projects and expert mentorship. 
         </p>
         <p className="text-xl text-gray-500 mb-12">
           <strong>{sessionCount} sessions available</strong> across 4 different camps this summer.
         </p>
       </section>
-
       {/* Partnership Section */}
       <section className="container mx-auto px-4 py-12">
         <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-2xl p-8">

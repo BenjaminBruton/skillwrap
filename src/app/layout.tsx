@@ -77,11 +77,11 @@ export default function RootLayout({
                 <div className="flex items-center">
                   {/* Desktop Navigation - Hidden on mobile */}
                   <div className="hidden md:flex items-center space-x-4">
-                    <Link href="/after-school" className="text-gray-600 hover:text-gray-900 transition-colors">
-                      After School
-                    </Link>
                     <Link href="/camps" className="text-gray-600 hover:text-gray-900 transition-colors">
                       Summer Camps
+                    </Link>
+                    <Link href="/workforce" className="text-gray-600 hover:text-gray-900 transition-colors">
+                      Workforce Training
                     </Link>
                     <Link href="/forms" className="text-gray-600 hover:text-gray-900 transition-colors">
                       Forms & Waivers

@@ -68,18 +68,18 @@ export default function MobileNavigation({ className = '' }: MobileNavigationPro
               {/* Navigation Links */}
               <nav className="flex-1 px-4 py-6 space-y-4">
                 <Link
-                  href="/after-school"
-                  className="block py-3 px-4 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
-                  onClick={closeMenu}
-                >
-                  After School
-                </Link>
-                <Link
                   href="/camps"
                   className="block py-3 px-4 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                   onClick={closeMenu}
                 >
                   Summer Camps
+                </Link>
+                <Link
+                  href="/workforce"
+                  className="block py-3 px-4 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                  onClick={closeMenu}
+                >
+                  Workforce Training
                 </Link>
                 <Link
                   href="/forms"
