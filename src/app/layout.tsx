@@ -10,6 +10,7 @@ import {
 } from '@clerk/nextjs'
 import Link from 'next/link'
 import MobileNavigation from '@/components/MobileNavigation'
+import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -119,6 +120,7 @@ export default function RootLayout({
             </header>
             {children}
           </div>
+          <Analytics />
         </body>
       </html>
     </ClerkProvider>
