@@ -9,6 +9,7 @@ import {
   UserButton,
 } from '@clerk/nextjs'
 import Link from 'next/link'
+import MobileNavigation from '@/components/MobileNavigation'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -73,40 +74,46 @@ export default function RootLayout({
                     SKILLWRAP
                   </span>
                 </Link>
-                <div className="flex items-center space-x-4">
-                  <Link href="/after-school" className="text-gray-600 hover:text-gray-900 transition-colors">
-                    After School
-                  </Link>
-                  <Link href="/camps" className="text-gray-600 hover:text-gray-900 transition-colors">
-                    Summer Camps
-                  </Link>
-                  <Link href="/forms" className="text-gray-600 hover:text-gray-900 transition-colors">
-                    Forms & Waivers
-                  </Link>
-                  <SignedOut>
-                    <SignInButton mode="modal">
-                      <button className="text-gray-600 hover:text-gray-900 transition-colors">
-                        Sign In
-                      </button>
-                    </SignInButton>
-                    <SignUpButton mode="modal">
-                      <button className="btn-primary">
-                        Get Started
-                      </button>
-                    </SignUpButton>
-                  </SignedOut>
-                  <SignedIn>
-                    <Link href="/dashboard" className="text-gray-600 hover:text-gray-900 transition-colors">
-                      Dashboard
+                <div className="flex items-center">
+                  {/* Desktop Navigation - Hidden on mobile */}
+                  <div className="hidden md:flex items-center space-x-4">
+                    <Link href="/after-school" className="text-gray-600 hover:text-gray-900 transition-colors">
+                      After School
                     </Link>
-                    <UserButton
-                      appearance={{
-                        elements: {
-                          avatarBox: "w-8 h-8"
-                        }
-                      }}
-                    />
-                  </SignedIn>
+                    <Link href="/camps" className="text-gray-600 hover:text-gray-900 transition-colors">
+                      Summer Camps
+                    </Link>
+                    <Link href="/forms" className="text-gray-600 hover:text-gray-900 transition-colors">
+                      Forms & Waivers
+                    </Link>
+                    <SignedOut>
+                      <SignInButton mode="modal">
+                        <button className="text-gray-600 hover:text-gray-900 transition-colors">
+                          Sign In
+                        </button>
+                      </SignInButton>
+                      <SignUpButton mode="modal">
+                        <button className="btn-primary">
+                          Get Started
+                        </button>
+                      </SignUpButton>
+                    </SignedOut>
+                    <SignedIn>
+                      <Link href="/dashboard" className="text-gray-600 hover:text-gray-900 transition-colors">
+                        Dashboard
+                      </Link>
+                      <UserButton
+                        appearance={{
+                          elements: {
+                            avatarBox: "w-8 h-8"
+                          }
+                        }}
+                      />
+                    </SignedIn>
+                  </div>
+                  
+                  {/* Mobile Navigation - Shown only on mobile */}
+                  <MobileNavigation />
                 </div>
               </nav>
             </header>
