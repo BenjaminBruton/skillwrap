@@ -109,7 +109,7 @@ export default async function CampsPage() {
     <div className="min-h-screen">
 
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-16 text-center">
+      <section className="container mx-auto px-4 py-12 pb-6 text-center">
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
           Summer Camps
         </h1>
@@ -117,12 +117,15 @@ export default async function CampsPage() {
           Choose from our specialized week-long camps designed to give kids and teens
           real-world skills through hands-on projects and expert mentorship. 
         </p>
+        <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+          Our camps are held at Nexus Esports: 1603 Washington Ave. Waco, TX 76701
+        </p>
         <p className="text-xl text-gray-500 mb-12">
           <strong>{sessionCount} sessions available</strong> across 4 different camps this summer.
         </p>
       </section>
       {/* Partnership Section */}
-      <section className="container mx-auto px-4 py-12">
+      <section className="container mx-auto px-4 pt-6 pb-12">
         <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-2xl p-8">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 lg:gap-12 mb-6">
             {/* SKILLWRAP Logo */}

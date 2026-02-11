@@ -79,7 +79,7 @@ export default async function HomePage() {
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-20 text-center">
         <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-          Summer Camps with Value
+          Summer Camps in Waco, TX
           <span className="block bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
             Code. Create. Compete.
           </span>

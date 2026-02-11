@@ -142,10 +142,10 @@ export default async function TabletopGamingCampPage() {
               <div className="card p-6">
                 <h4 className="font-semibold text-gray-900 mb-3">Schedule</h4>
                 <ul className="space-y-2 text-sm text-gray-600">
-                  <li>• Monday - Thursday</li>
+                  <li>• Monday - Friday</li>
                   <li>• Afternoon: 12:00 PM - 5:00 PM</li>
                   <li>• Small class sizes (max {camp.max_capacity} students)</li>
-                  <li>• 20 hours over 4 days</li>
+                  <li>• 20 hours over 5 days</li>
                 </ul>
               </div>
               
