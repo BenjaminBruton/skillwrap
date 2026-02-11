@@ -21,31 +21,27 @@
     <!-- Main Content Container -->
     <g transform="translate(600, 315)">
         <!-- Logo and Text Container -->
-        <g transform="translate(-300, -80)">
+        <g transform="translate(-350, -60)">
             <!-- SW Logo Box -->
-            <rect x="0" y="0" width="80" height="80" rx="12" fill="url(#logoGradient)" />
-            <text x="40" y="52" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white"
+            <rect x="0" y="0" width="60" height="60" rx="8" fill="url(#logoGradient)" />
+            <text x="30" y="40" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white"
                 text-anchor="middle">SW</text>
 
-            <!-- SKILLWRAP Text -->
-            <text x="100" y="55" font-family="Arial, sans-serif" font-size="56" font-weight="bold"
-                fill="url(#textGradient)">SKILLWRAP</text>
+            <!-- Skillwrap - Summer Camps Text -->
+            <text x="80" y="40" font-family="Arial, sans-serif" font-size="48" font-weight="bold"
+                fill="url(#textGradient)">Skillwrap - Summer Camps</text>
         </g>
 
-        <!-- Tagline -->
-        <text x="0" y="40" font-family="Arial, sans-serif" font-size="28" fill="#4b5563" text-anchor="middle">Tech
-            Summer Camps for Kids &amp; Teens</text>
-
-        <!-- Features -->
-        <g transform="translate(0, 100)">
-            <text x="-300" y="0" font-family="Arial, sans-serif" font-size="20" fill="#6b7280"
-                text-anchor="middle">Programming</text>
-            <text x="-100" y="0" font-family="Arial, sans-serif" font-size="20" fill="#6b7280" text-anchor="middle">AI
-                &amp; ML</text>
-            <text x="100" y="0" font-family="Arial, sans-serif" font-size="20" fill="#6b7280"
+        <!-- Camp Types -->
+        <g transform="translate(0, 60)">
+            <text x="-280" y="0" font-family="Arial, sans-serif" font-size="18" fill="#6b7280" text-anchor="middle">AI
+                Development</text>
+            <text x="-90" y="0" font-family="Arial, sans-serif" font-size="18" fill="#6b7280"
                 text-anchor="middle">Entrepreneurship</text>
-            <text x="300" y="0" font-family="Arial, sans-serif" font-size="20" fill="#6b7280"
+            <text x="90" y="0" font-family="Arial, sans-serif" font-size="18" fill="#6b7280"
                 text-anchor="middle">Esports</text>
+            <text x="280" y="0" font-family="Arial, sans-serif" font-size="18" fill="#6b7280"
+                text-anchor="middle">Tabletop Card Gaming</text>
         </g>
     </g>
 </svg>
