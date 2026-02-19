@@ -41,6 +41,15 @@ function BookingFormContent({ session, camp, onSuccess, onError }: BookingFormPr
     specialNeeds: ''
   })
 
+  const [discountCode, setDiscountCode] = useState('')
+  const [discountValidation, setDiscountValidation] = useState<{
+    isValid: boolean
+    discount: any
+    message: string
+  } | null>(null)
+  const [validatingDiscount, setValidatingDiscount] = useState(false)
+  const [finalPrice, setFinalPrice] = useState(camp.price)
+
   const [errors, setErrors] = useState<Record<string, string>>({})
 
   const validateStep1 = () => {
@@ -70,6 +79,73 @@ function BookingFormContent({ session, camp, onSuccess, onError }: BookingFormPr
     return Object.keys(newErrors).length === 0
   }
 
+  const validateDiscountCode = async (code: string) => {
+    if (!code.trim()) {
+      setDiscountValidation(null)
+      setFinalPrice(camp.price)
+      return
+    }
+
+    setValidatingDiscount(true)
+    try {
+      const response = await fetch('/api/discount-codes/validate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          code: code.trim(),
+          campSlug: camp.slug,
+          orderAmount: camp.price
+        })
+      })
+
+      const data = await response.json()
+
+      if (response.ok && data.valid) {
+        const discountAmount = data.calculatedDiscount || 0
+        const finalAmount = camp.price - discountAmount
+        
+        setDiscountValidation({
+          isValid: true,
+          discount: {
+            discount_type: data.discountType,
+            discount_value: data.discountValue
+          },
+          message: data.message
+        })
+        setFinalPrice(finalAmount)
+      } else {
+        setDiscountValidation({
+          isValid: false,
+          discount: null,
+          message: data.error || 'Invalid discount code'
+        })
+        setFinalPrice(camp.price)
+      }
+    } catch (error) {
+      setDiscountValidation({
+        isValid: false,
+        discount: null,
+        message: 'Error validating discount code'
+      })
+      setFinalPrice(camp.price)
+    } finally {
+      setValidatingDiscount(false)
+    }
+  }
+
+  const handleApplyDiscount = () => {
+    validateDiscountCode(discountCode)
+  }
+
+  const handleDiscountCodeChange = (code: string) => {
+    setDiscountCode(code)
+    // Clear previous validation when user types
+    if (discountValidation) {
+      setDiscountValidation(null)
+      setFinalPrice(camp.price)
+    }
+  }
+
   const handleNextStep = () => {
     if (validateStep1()) {
       setCurrentStep(2)
@@ -92,7 +168,8 @@ function BookingFormContent({ session, camp, onSuccess, onError }: BookingFormPr
           sessionId: session.id,
           ...bookingData,
           studentAge: parseInt(bookingData.studentAge),
-          amount: camp.price
+          amount: finalPrice,
+          discountCode: discountValidation?.isValid ? discountCode : null
         })
       })
 
@@ -176,7 +253,16 @@ function BookingFormContent({ session, camp, onSuccess, onError }: BookingFormPr
             <span className="font-medium">Age Range:</span> {camp.age_range}
           </div>
           <div>
-            <span className="font-medium">Price:</span> <span className="text-2xl font-bold text-green-600">${camp.price}</span>
+            <span className="font-medium">Price:</span>
+            {discountValidation?.isValid ? (
+              <div className="flex flex-col">
+                <span className="text-lg text-gray-500 line-through">${camp.price}</span>
+                <span className="text-2xl font-bold text-green-600">${finalPrice}</span>
+                <span className="text-sm text-blue-600">{discountValidation.message}</span>
+              </div>
+            ) : (
+              <span className="text-2xl font-bold text-green-600">${finalPrice}</span>
+            )}
           </div>
         </div>
       </div>
@@ -337,15 +423,71 @@ function BookingFormContent({ session, camp, onSuccess, onError }: BookingFormPr
           <>
             <div className="card p-6">
               <h3 className="text-lg font-semibold mb-4">Payment Information</h3>
+              
+              {/* Discount Code Section */}
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Discount Code (Optional)
+                </label>
+                <div className="flex space-x-2">
+                  <input
+                    type="text"
+                    value={discountCode}
+                    onChange={(e) => handleDiscountCodeChange(e.target.value)}
+                    className="input flex-1"
+                    placeholder="Enter discount code"
+                    disabled={validatingDiscount}
+                  />
+                  <button
+                    type="button"
+                    onClick={handleApplyDiscount}
+                    disabled={!discountCode.trim() || validatingDiscount}
+                    className="btn-outline px-4 py-2 whitespace-nowrap"
+                  >
+                    {validatingDiscount ? (
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
+                    ) : (
+                      'Apply'
+                    )}
+                  </button>
+                </div>
+                {discountValidation && (
+                  <p className={`text-sm mt-1 ${
+                    discountValidation.isValid ? 'text-green-600' : 'text-red-500'
+                  }`}>
+                    {discountValidation.message}
+                  </p>
+                )}
+              </div>
+
+              {/* Price Summary */}
+              <div className="mb-4 p-4 bg-gray-50 rounded-lg">
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-600">Subtotal:</span>
+                  <span className="text-sm">${camp.price}</span>
+                </div>
+                {discountValidation?.isValid && (
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-green-600">Discount:</span>
+                    <span className="text-sm text-green-600">-${(camp.price - finalPrice).toFixed(2)}</span>
+                  </div>
+                )}
+                <div className="border-t pt-2 mt-2">
+                  <div className="flex justify-between items-center">
+                    <span className="font-semibold">Total:</span>
+                    <span className="font-semibold text-lg">${finalPrice}</span>
+                  </div>
+                </div>
+              </div>
+
               <div className="mb-4">
-                <CardElement 
+                <CardElement
                   options={{
                     style: {
                       base: {
                         fontSize: '16px',
                         color: '#424770',
-                        '::placeholder': { color: '#aab7c4' },
-                        padding: '12px'
+                        '::placeholder': { color: '#aab7c4' }
                       },
                       invalid: {
                         color: '#9e2146',
@@ -355,7 +497,7 @@ function BookingFormContent({ session, camp, onSuccess, onError }: BookingFormPr
                 />
               </div>
               <p className="text-sm text-gray-600">
-                Your payment is secure and encrypted. You will be charged ${camp.price} for this camp registration.
+                Your payment is secure and encrypted. You will be charged ${finalPrice} for this camp registration.
               </p>
             </div>
 
@@ -373,7 +515,7 @@ function BookingFormContent({ session, camp, onSuccess, onError }: BookingFormPr
                 disabled={!stripe || loading}
                 className="btn-primary flex-1"
               >
-                {loading ? 'Processing...' : `Pay $${camp.price} & Book Camp`}
+                {loading ? 'Processing...' : `Pay $${finalPrice} & Book Camp`}
               </button>
             </div>
           </>

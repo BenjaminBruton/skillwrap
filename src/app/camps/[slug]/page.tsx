@@ -6,6 +6,10 @@ import SessionSelector from '@/components/SessionSelector'
 import { formatDateRange, formatTime } from '@/lib/utils'
 import { Session } from '@/types'
 
+// Force dynamic rendering and disable caching
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 interface CampPageProps {
   params: {
     slug: string
