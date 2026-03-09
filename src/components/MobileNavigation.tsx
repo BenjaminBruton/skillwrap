@@ -74,13 +74,14 @@ export default function MobileNavigation({ className = '' }: MobileNavigationPro
                 >
                   Summer Camps
                 </Link>
-                <Link
+                {/* Temporarily hidden - focusing on summer camps */}
+                {/* <Link
                   href="/workforce"
                   className="block py-3 px-4 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                   onClick={closeMenu}
                 >
                   Workforce Training
-                </Link>
+                </Link> */}
                 <Link
                   href="/forms"
                   className="block py-3 px-4 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"

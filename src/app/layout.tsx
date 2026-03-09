@@ -81,9 +81,10 @@ export default function RootLayout({
                     <Link href="/camps" className="text-gray-600 hover:text-gray-900 transition-colors">
                       Summer Camps
                     </Link>
-                    <Link href="/workforce" className="text-gray-600 hover:text-gray-900 transition-colors">
+                    {/* Temporarily hidden - focusing on summer camps */}
+                    {/* <Link href="/workforce" className="text-gray-600 hover:text-gray-900 transition-colors">
                       Workforce Training
-                    </Link>
+                    </Link> */}
                     <Link href="/forms" className="text-gray-600 hover:text-gray-900 transition-colors">
                       Forms & Waivers
                     </Link>
