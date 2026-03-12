@@ -12,6 +12,7 @@ export async function GET(req: NextRequest) {
         *,
         camp:camps(*)
       `)
+      .neq('status', 'closed') // Filter out closed sessions
       .order('week_number', { ascending: true })
       .order('time_slot', { ascending: true })
 
