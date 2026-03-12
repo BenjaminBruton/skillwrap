@@ -6,6 +6,22 @@ import { Session, Camp } from '@/types'
 
 async function getCampData() {
   try {
+    // Fetch camp data from Supabase
+    const campsResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/camps`, {
+      cache: 'no-store'
+    })
+    
+    if (!campsResponse.ok) {
+      throw new Error('Failed to fetch camps')
+    }
+    
+    const camps: Camp[] = await campsResponse.json()
+    const camp = camps.find(c => c.slug === 'tabletop-gaming')
+    
+    if (!camp) {
+      throw new Error('Tabletop gaming camp not found')
+    }
+
     // Fetch sessions from the API
     const sessionsResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/sessions`, {
       cache: 'no-store'
@@ -18,8 +34,8 @@ async function getCampData() {
     const sessions: Session[] = await sessionsResponse.json()
     
     // Filter sessions for tabletop-gaming camp
-    const tabletopSessions = sessions.filter(session => 
-      session.camp_id === 'tabletop-gaming' || 
+    const tabletopSessions = sessions.filter(session =>
+      session.camp_id === 'tabletop-gaming' ||
       (session.camp && session.camp.slug === 'tabletop-gaming')
     )
 
@@ -32,21 +48,6 @@ async function getCampData() {
 
     const availableSessions = sessionsWithAvailability.filter(session => !session.is_full)
     const fullSessions = sessionsWithAvailability.filter(session => session.is_full)
-
-    // Camp data
-    const camp: Camp = {
-      id: 'tabletop-gaming',
-      name: 'Tabletop Card Gaming: Collector to Competitor',
-      slug: 'tabletop-gaming',
-      description: 'Transform your passion for card games into competitive mastery! Learn advanced strategies, deck building, tournament play, and the business side of competitive gaming. Perfect for aspiring professional players and collectors who want to understand the deeper mechanics of their favorite games and develop the skills needed to compete at higher levels.',
-      short_description: 'Transform your passion for card games into competitive mastery',
-      age_range: '10-18',
-      max_capacity: 20,
-      price: 200,
-      image_url: '',
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString()
-    }
 
     return {
       camp,
@@ -65,7 +66,7 @@ async function getCampData() {
         short_description: 'Transform your passion for card games into competitive mastery',
         age_range: '10-18',
         max_capacity: 20,
-        price: 200,
+        price: 225, // Updated fallback price
         image_url: '',
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString()

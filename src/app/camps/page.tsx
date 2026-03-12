@@ -1,89 +1,26 @@
 import Link from 'next/link'
-import { ArrowRightIcon, CodeBracketIcon, RocketLaunchIcon, TrophyIcon, ComputerDesktopIcon, PuzzlePieceIcon, CalendarIcon } from '@heroicons/react/24/outline'
+import { ArrowRightIcon, CalendarIcon } from '@heroicons/react/24/outline'
 import { supabase } from '@/lib/supabase'
+import { enhanceCampData, type EnhancedCamp } from '@/lib/campUtils'
 
-const camps = [
-  {
-    id: 1,
-    name: 'Software Dev: AI-Powered Productivity',
-    slug: 'software-dev-ai',
-    shortDescription: 'Transition from AI "users" to "builders" with cutting-edge tools',
-    description: 'In this forward-looking program, students transition from "users" of AI to "builders" with it, mastering the tools that are currently redefining the software industry. Participants will learn to leverage Large Language Models (LLMs) and agentic frameworks to accelerate their coding workflow, focusing on prompt engineering, automated debugging, and integrating AI APIs into functional Python applications. By the end of the week, students will have built an AI-driven personal assistant or productivity bot, gaining a high-level understanding of the intersection between traditional logic and modern generative technology.',
-    price: 300,
-    ageRange: '13-18',
-    maxStudents: 12,
-    sessionsAvailable: 5,
-    icon: CodeBracketIcon,
-    color: 'from-blue-500 to-purple-600',
-    features: [
-      'LLM Integration',
-      'Prompt Engineering',
-      'AI-Powered Debugging',
-      'Python Applications',
-      'Personal AI Assistant'
-    ]
-  },
-  {
-    id: 3,
-    name: 'Entrepreneurship: Little Shark Tank',
-    slug: 'entrepreneurship-shark-tank',
-    shortDescription: 'From lightbulb moment to live investor pitch',
-    description: 'This immersive camp takes students through the high-stakes journey of a startup founder, from the initial "lightbulb moment" to a live investor pitch. Participants will learn the fundamentals of market research, product prototyping, and financial modeling (calculating profit margins and "burn rates") while developing a brand identity and marketing strategy. The program culminates in a "Shark Tank" style finale where students present their polished business plans to a panel of judges, honing the critical soft skills of public speaking, negotiation, and resilience.',
-    price: 275,
-    ageRange: '10-18',
-    maxStudents: 15,
-    sessionsAvailable: 5,
-    icon: RocketLaunchIcon,
-    color: 'from-yellow-500 to-red-600',
-    features: [
-      'Market Research',
-      'Financial Modeling',
-      'Brand Development',
-      'Investor Pitching',
-      'Public Speaking'
-    ]
-  },
-  {
-    id: 4,
-    name: 'Esports Academy: The Business of Play',
-    slug: 'esports-academy',
-    shortDescription: 'Explore the multi-billion dollar esports ecosystem',
-    description: 'Going far beyond the controller, this academy explores the multi-billion dollar ecosystem of the global Esports industry. Students will analyze the various professional pathways available, including tournament organization, broadcast production (using OBS and shoutcasting), team management, and digital branding. While incorporating high-level gameplay and strategic VOD reviews, the focus remains on the professional skills required to run an organization, providing students with a holistic view of how their passion for gaming translates into a viable career in sports and entertainment.',
-    price: 275,
-    ageRange: '10-18',
-    maxStudents: 15,
-    sessionsAvailable: 5,
-    icon: TrophyIcon,
-    color: 'from-purple-500 to-pink-600',
-    features: [
-      'Tournament Organization',
-      'Broadcast Production',
-      'Team Management',
-      'Digital Branding',
-      'Strategic Analysis'
-    ]
-  },
-  {
-    id: 5,
-    name: 'Tabletop Card Gaming: Collector to Competitor',
-    slug: 'tabletop-gaming',
-    shortDescription: 'Transform your passion for card games into competitive mastery',
-    description: 'Transform your passion for card games into competitive mastery! Learn advanced strategies, deck building, tournament play, and the business side of competitive gaming. Perfect for aspiring professional players and collectors who want to understand the deeper mechanics of their favorite games and develop the skills needed to compete at higher levels.',
-    price: 200,
-    ageRange: '10-18',
-    maxStudents: 20,
-    sessionsAvailable: 4,
-    icon: PuzzlePieceIcon,
-    color: 'from-orange-500 to-red-600',
-    features: [
-      'Advanced Deck Building',
-      'Tournament Strategy',
-      'Card Game Economics',
-      'Meta Analysis',
-      'Professional Gaming Mindset'
-    ]
-  },
-]
+async function getCamps(): Promise<EnhancedCamp[]> {
+  try {
+    const { data: camps, error } = await supabase
+      .from('camps')
+      .select('*')
+      .order('created_at', { ascending: true })
+
+    if (error) {
+      console.error('Error fetching camps:', error)
+      return []
+    }
+
+    return enhanceCampData(camps || [])
+  } catch (error) {
+    console.error('Unexpected error fetching camps:', error)
+    return []
+  }
+}
 
 async function getSessionCount() {
   try {
@@ -105,6 +42,7 @@ async function getSessionCount() {
 
 export default async function CampsPage() {
   const sessionCount = await getSessionCount()
+  const camps = await getCamps()
   return (
     <div className="min-h-screen">
 
@@ -208,7 +146,7 @@ export default async function CampsPage() {
                     </p>
                     <div className="flex items-center justify-between mb-4">
                       <span className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
-                        Ages {camp.ageRange}
+                        Ages {camp.age_range}
                       </span>
                       <span className="text-3xl font-bold text-gray-900">${camp.price}</span>
                     </div>
@@ -217,13 +155,13 @@ export default async function CampsPage() {
                         <svg className="w-4 h-4 mr-1 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
-                        {camp.sessionsAvailable} Sessions Available
+                        Sessions Available
                       </span>
                       <span className="flex items-center">
                         <svg className="w-4 h-4 mr-1 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                         </svg>
-                        Max {camp.maxStudents} Students
+                        Max {camp.max_capacity} Students
                       </span>
                     </div>
                     <div className="flex items-center justify-center mb-6 text-sm text-gray-600">
@@ -237,7 +175,7 @@ export default async function CampsPage() {
                     <div className="mb-6">
                       <h4 className="font-semibold text-gray-900 mb-3">What You'll Learn:</h4>
                       <ul className="grid grid-cols-1 gap-2">
-                        {camp.features.map((feature, index) => (
+                        {camp.features?.map((feature, index) => (
                           <li key={index} className="flex items-center text-sm text-gray-600">
                             <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
                             {feature}

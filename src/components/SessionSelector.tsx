@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useUser } from '@clerk/nextjs'
 import Link from 'next/link'
 import { CalendarIcon, ClockIcon, UserGroupIcon } from '@heroicons/react/24/outline'
@@ -17,11 +17,20 @@ export default function SessionSelector({ sessions, camp }: SessionSelectorProps
   const { user, isSignedIn } = useUser()
   const [selectedSession, setSelectedSession] = useState<Session | null>(null)
   const [showBookingForm, setShowBookingForm] = useState(false)
+  const [currentPath, setCurrentPath] = useState('')
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setCurrentPath(window.location.pathname)
+    }
+  }, [])
 
   const handleSessionSelect = (session: Session) => {
     if (!isSignedIn) {
       // Redirect to sign in
-      window.location.href = `/sign-in?redirect_url=${encodeURIComponent(window.location.pathname)}`
+      if (typeof window !== 'undefined') {
+        window.location.href = `/sign-in?redirect_url=${encodeURIComponent(currentPath)}`
+      }
       return
     }
 
@@ -123,7 +132,7 @@ export default function SessionSelector({ sessions, camp }: SessionSelectorProps
               </button>
             ) : (
               <Link
-                href={`/sign-in?redirect_url=${encodeURIComponent(window.location.pathname)}`}
+                href={`/sign-in?redirect_url=${encodeURIComponent(currentPath)}`}
                 className="px-4 py-2 bg-blue-600 text-white rounded-md text-sm font-medium hover:bg-blue-700 transition-colors"
               >
                 Sign In to Book

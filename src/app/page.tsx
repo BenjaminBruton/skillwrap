@@ -1,57 +1,26 @@
 import Link from 'next/link'
-import { ArrowRightIcon, CodeBracketIcon, RocketLaunchIcon, TrophyIcon, ComputerDesktopIcon, PuzzlePieceIcon } from '@heroicons/react/24/outline'
+import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import { supabase } from '@/lib/supabase'
+import { enhanceCampData, type EnhancedCamp } from '@/lib/campUtils'
 
-const camps = [
-  {
-    id: 1,
-    name: 'Software Dev: AI-Powered Productivity',
-    slug: 'software-dev-ai',
-    shortDescription: 'Transition from AI "users" to "builders" with cutting-edge tools',
-    description: 'In this forward-looking program, students transition from "users" of AI to "builders" with it, mastering the tools that are currently redefining the software industry. Participants will learn to leverage Large Language Models (LLMs) and agentic frameworks to accelerate their coding workflow, focusing on prompt engineering, automated debugging, and integrating AI APIs into functional Python applications. By the end of the week, students will have built an AI-driven personal assistant or productivity bot, gaining a high-level understanding of the intersection between traditional logic and modern generative technology.',
-    price: 300,
-    ageRange: '13-18',
-    icon: CodeBracketIcon,
-    color: 'from-blue-500 to-purple-600',
-    highlights: ['LLM Integration', 'Prompt Engineering', 'AI-Powered Debugging', 'Python Applications', 'Personal AI Assistant']
-  },
-  {
-    id: 3,
-    name: 'Entrepreneurship: Little Shark Tank',
-    slug: 'entrepreneurship-shark-tank',
-    shortDescription: 'From lightbulb moment to live investor pitch',
-    description: 'This immersive camp takes students through the high-stakes journey of a startup founder, from the initial "lightbulb moment" to a live investor pitch. Participants will learn the fundamentals of market research, product prototyping, and financial modeling (calculating profit margins and "burn rates") while developing a brand identity and marketing strategy. The program culminates in a "Shark Tank" style finale where students present their polished business plans to a panel of judges, honing the critical soft skills of public speaking, negotiation, and resilience.',
-    price: 275,
-    ageRange: '10-18',
-    icon: TrophyIcon,
-    color: 'from-yellow-500 to-red-600',
-    highlights: ['Market Research', 'Financial Modeling', 'Brand Development', 'Investor Pitching', 'Public Speaking']
-  },
-  {
-    id: 4,
-    name: 'Esports Academy: The Business of Play',
-    slug: 'esports-academy',
-    shortDescription: 'Explore the multi-billion dollar esports ecosystem',
-    description: 'Going far beyond the controller, this academy explores the multi-billion dollar ecosystem of the global Esports industry. Students will analyze the various professional pathways available, including tournament organization, broadcast production (using OBS and shoutcasting), team management, and digital branding. While incorporating high-level gameplay and strategic VOD reviews, the focus remains on the professional skills required to run an organization, providing students with a holistic view of how their passion for gaming translates into a viable career in sports and entertainment.',
-    price: 275,
-    ageRange: '10-18',
-    icon: ComputerDesktopIcon,
-    color: 'from-purple-500 to-pink-600',
-    highlights: ['Tournament Organization', 'Broadcast Production', 'Team Management', 'Digital Branding', 'Strategic Analysis']
-  },
-  {
-    id: 5,
-    name: 'Tabletop Card Gaming: Collector to Competitor',
-    slug: 'tabletop-gaming',
-    shortDescription: 'Transform your passion for card games into competitive mastery',
-    description: 'Transform your passion for card games into competitive mastery! Learn advanced strategies, deck building, tournament play, and the business side of competitive gaming. Perfect for aspiring professional players and collectors who want to understand the deeper mechanics of their favorite games and develop the skills needed to compete at higher levels.',
-    price: 200,
-    ageRange: '10-18',
-    icon: PuzzlePieceIcon,
-    color: 'from-orange-500 to-red-600',
-    highlights: ['Advanced Deck Building', 'Tournament Strategy', 'Card Game Economics', 'Meta Analysis', 'Professional Gaming Mindset']
-  },
-]
+async function getCamps(): Promise<EnhancedCamp[]> {
+  try {
+    const { data: camps, error } = await supabase
+      .from('camps')
+      .select('*')
+      .order('created_at', { ascending: true })
+
+    if (error) {
+      console.error('Error fetching camps:', error)
+      return []
+    }
+
+    return enhanceCampData(camps || [])
+  } catch (error) {
+    console.error('Unexpected error fetching camps:', error)
+    return []
+  }
+}
 
 async function getSessionCount() {
   try {
@@ -73,6 +42,7 @@ async function getSessionCount() {
 
 export default async function HomePage() {
   const sessionCount = await getSessionCount()
+  const camps = await getCamps()
   return (
     <div className="min-h-screen">
 
@@ -148,10 +118,10 @@ export default async function HomePage() {
                     {camp.name}
                   </h3>
                   <p className="text-gray-600 mb-4">
-                    {camp.shortDescription}
+                    {camp.short_description}
                   </p>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-sm text-gray-500">Ages {camp.ageRange}</span>
+                    <span className="text-sm text-gray-500">Ages {camp.age_range}</span>
                     <span className="text-2xl font-bold text-gray-900">${camp.price}</span>
                   </div>
                   <Link 
