@@ -32,6 +32,7 @@ async function getSessions() {
           slug
         )
       `)
+      .neq('status', 'closed') // Exclude closed sessions from public calendar
       .order('start_date', { ascending: true })
 
     if (error) {

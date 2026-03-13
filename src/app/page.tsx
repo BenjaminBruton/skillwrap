@@ -27,6 +27,7 @@ async function getSessionCount() {
     const { count, error } = await supabase
       .from('sessions')
       .select('*', { count: 'exact', head: true })
+      .neq('status', 'closed') // Exclude closed sessions from count
     
     if (error) {
       console.error('Error fetching session count:', error)

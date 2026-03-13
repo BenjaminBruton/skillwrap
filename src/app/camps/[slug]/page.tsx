@@ -98,6 +98,7 @@ async function getCampData(slug: string) {
         .from('sessions')
         .select('*')
         .eq('camp_id', camp.id)
+        .neq('status', 'closed')
         .order('week_number', { ascending: true })
         .order('time_slot', { ascending: true })
 
