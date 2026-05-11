@@ -8,14 +8,27 @@ async function getCamps(): Promise<EnhancedCamp[]> {
     const { data: camps, error } = await supabase
       .from('camps')
       .select('*')
-      .order('created_at', { ascending: true })
 
     if (error) {
       console.error('Error fetching camps:', error)
       return []
     }
 
-    return enhanceCampData(camps || [])
+    // Custom ordering: Esports, Junior Art, Tabletop, Entrepreneurship, AI Developer
+    const orderMap: Record<string, number> = {
+      'esports-academy': 1,
+      'junior-art-masterclass': 2,
+      'tabletop-gaming': 3,
+      'entrepreneurship-shark-tank': 4,
+      'software-dev-ai': 5
+    }
+
+    const enhancedCamps = enhanceCampData(camps || [])
+    return enhancedCamps.sort((a, b) => {
+      const orderA = orderMap[a.slug] || 999
+      const orderB = orderMap[b.slug] || 999
+      return orderA - orderB
+    })
   } catch (error) {
     console.error('Unexpected error fetching camps:', error)
     return []
@@ -60,7 +73,7 @@ export default async function CampsPage() {
           Our camps are held at Nexus Esports: 1603 Washington Ave. Waco, TX 76701
         </p>
         <p className="text-xl text-gray-500 mb-12">
-          <strong>{sessionCount} sessions available</strong> across 4 different camps this summer.
+          <strong>{sessionCount} sessions available</strong> across 5 different camps this summer.
         </p>
       </section>
       {/* Partnership Section */}
@@ -131,13 +144,20 @@ export default async function CampsPage() {
       <section className="container mx-auto px-4 pb-20">
         <div className="grid md:grid-cols-2 gap-8">
           {camps.map((camp) => {
-            const IconComponent = camp.icon
             return (
               <div key={camp.id} className="card p-8 hover:shadow-xl transition-all duration-300">
                 <div className="flex items-start space-x-6">
-                  <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${camp.color} flex items-center justify-center flex-shrink-0`}>
-                    <IconComponent className="h-8 w-8 text-white" />
-                  </div>
+                  {camp.image_url ? (
+                    <img 
+                      src={camp.image_url} 
+                      alt={camp.name}
+                      className="w-24 h-24 rounded-xl object-cover flex-shrink-0"
+                    />
+                  ) : (
+                    <div className={`w-24 h-24 rounded-xl bg-gradient-to-br ${camp.color || 'from-gray-400 to-gray-600'} flex items-center justify-center flex-shrink-0`}>
+                      <span className="text-white text-xs font-bold">No Image</span>
+                    </div>
+                  )}
                   <div className="flex-1">
                     <h3 className="text-2xl font-bold text-gray-900 mb-2">
                       {camp.name}

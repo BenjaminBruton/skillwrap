@@ -5,6 +5,7 @@ import { CalendarIcon, ClockIcon, UserGroupIcon, CurrencyDollarIcon, CheckCircle
 import { supabase, supabaseAdmin } from '@/lib/supabase'
 import { formatDateRange, formatTime } from '@/lib/utils'
 import { Booking, Session, Camp } from '@/types'
+import { enhanceCampData, type EnhancedCamp } from '@/lib/campUtils'
 import fs from 'fs'
 import path from 'path'
 
@@ -157,6 +158,25 @@ async function getUserForms(userEmail: string) {
   }
 }
 
+async function getCamps(): Promise<EnhancedCamp[]> {
+  try {
+    const { data: camps, error } = await supabase
+      .from('camps')
+      .select('*')
+      .order('created_at', { ascending: true })
+
+    if (error) {
+      console.error('Error fetching camps:', error)
+      return []
+    }
+
+    return enhanceCampData(camps || [])
+  } catch (error) {
+    console.error('Unexpected error fetching camps:', error)
+    return []
+  }
+}
+
 async function getUserBookings(userId: string) {
   try {
     // Try to fetch from database first using supabaseAdmin to bypass RLS
@@ -244,9 +264,10 @@ export default async function DashboardPage() {
 
   const userEmail = user.primaryEmailAddress?.emailAddress || ''
 
-  const [bookings, forms] = await Promise.all([
+  const [bookings, forms, camps] = await Promise.all([
     getUserBookings(user.id),
-    getUserForms(userEmail)
+    getUserForms(userEmail),
+    getCamps()
   ])
 
   const confirmedBookings = bookings.filter((b: any) => b.booking_status === 'confirmed')
@@ -572,48 +593,39 @@ export default async function DashboardPage() {
           )}
         </div>
 
-        {/* Quick Actions */}
+        {/* Available Camps */}
         <div className="mt-12">
-          <h2 className="text-xl font-semibold text-gray-900 mb-6">Quick Actions</h2>
+          <h2 className="text-xl font-semibold text-gray-900 mb-6">Browse Our Camps</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Link
-              href="/camps"
-              className="card p-6 hover:shadow-lg transition-shadow group"
-            >
-              <div className="flex items-center">
-                <div className="p-3 bg-blue-100 rounded-lg group-hover:bg-blue-200 transition-colors">
-                  <CalendarIcon className="h-6 w-6 text-blue-600" />
+            {camps.map((camp) => (
+              <Link
+                key={camp.id}
+                href={`/camps/${camp.slug}`}
+                className="card overflow-hidden hover:shadow-xl transition-shadow group"
+              >
+                {camp.image_url ? (
+                  <div className="h-48 overflow-hidden">
+                    <img 
+                      src={camp.image_url} 
+                      alt={camp.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                ) : (
+                  <div className={`h-48 bg-gradient-to-br ${camp.color || 'from-gray-400 to-gray-600'} flex items-center justify-center`}>
+                    <span className="text-white text-xl font-bold">No Image</span>
+                  </div>
+                )}
+                <div className="p-4">
+                  <h3 className="font-semibold text-gray-900 mb-1">{camp.name}</h3>
+                  <p className="text-sm text-gray-600 mb-3 line-clamp-2">{camp.short_description}</p>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-gray-500">Ages {camp.age_range}</span>
+                    <span className="font-bold text-gray-900">${camp.price}</span>
+                  </div>
                 </div>
-                <div className="ml-4">
-                  <h3 className="font-medium text-gray-900">Book Another Camp</h3>
-                  <p className="text-sm text-gray-600">Browse available sessions</p>
-                </div>
-              </div>
-            </Link>
-
-            <div className="card p-6 hover:shadow-lg transition-shadow group cursor-pointer">
-              <div className="flex items-center">
-                <div className="p-3 bg-green-100 rounded-lg group-hover:bg-green-200 transition-colors">
-                  <UserGroupIcon className="h-6 w-6 text-green-600" />
-                </div>
-                <div className="ml-4">
-                  <h3 className="font-medium text-gray-900">Update Profile</h3>
-                  <p className="text-sm text-gray-600">Manage account settings</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="card p-6 hover:shadow-lg transition-shadow group cursor-pointer">
-              <div className="flex items-center">
-                <div className="p-3 bg-purple-100 rounded-lg group-hover:bg-purple-200 transition-colors">
-                  <CurrencyDollarIcon className="h-6 w-6 text-purple-600" />
-                </div>
-                <div className="ml-4">
-                  <h3 className="font-medium text-gray-900">Payment History</h3>
-                  <p className="text-sm text-gray-600">View past transactions</p>
-                </div>
-              </div>
-            </div>
+              </Link>
+            ))}
           </div>
         </div>
       </div>

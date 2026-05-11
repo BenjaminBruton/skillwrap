@@ -4,12 +4,13 @@ A modern Next.js website for SKILLWRAP tech summer camps featuring camp registra
 
 ## 🏕️ Camps Offered
 
-1. **Software Dev: AI-Powered Productivity** - $299 (Ages 13-17)
-2. **Full-Stack Dev: The Startup Prototype** - $349 (Ages 14-18)
-3. **Entrepreneurship: Little Shark Tank** - $199 (Ages 12-16)
-4. **Esports Academy** - $249 (Ages 13-17)
+1. **Software Dev: AI-Powered Productivity** - $300 (Ages 13-18)
+2. **Entrepreneurship: Little Shark Tank** - $275 (Ages 10-18)
+3. **Esports Academy: The Business of Play** - $275 (Ages 10-18)
+4. **Tabletop Card Gaming: Collector to Competitor** - $225 (Ages 10-18)
+5. **Photography: From Snapshot to Studio** - $250 (Ages 10-18)
 
-Each camp runs 4 times over the summer with morning and afternoon sessions.
+Each camp runs multiple times over the summer with morning and afternoon sessions.
 
 ## 🚀 Tech Stack
 

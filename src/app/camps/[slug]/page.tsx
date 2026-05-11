@@ -194,6 +194,27 @@ export default async function CampDetailPage({ params }: CampPageProps) {
               {camp.description}
             </p>
 
+            {/* Instructor Bio - only for Junior Art Masterclass */}
+            {camp.slug === 'junior-art-masterclass' && camp.instructor_bio && (
+              <div className="card p-6 mb-8 bg-gradient-to-br from-pink-50 to-rose-50">
+                <h3 className="text-xl font-semibold mb-4 text-gray-900">Meet Your Instructor</h3>
+                <div className="flex flex-col md:flex-row gap-6">
+                  {camp.instructor_photo && (
+                    <img 
+                      src={camp.instructor_photo} 
+                      alt="Instructor Photo"
+                      className="w-32 h-32 rounded-lg object-cover flex-shrink-0"
+                    />
+                  )}
+                  <div className="flex-1">
+                    <p className="text-gray-700 whitespace-pre-line leading-relaxed">
+                      {camp.instructor_bio}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* What Students Will Learn */}
             <div className="card p-6 mb-8">
               <h3 className="text-xl font-semibold mb-4">What Students Will Learn</h3>
@@ -213,9 +234,21 @@ export default async function CampDetailPage({ params }: CampPageProps) {
                 <h4 className="font-semibold text-gray-900 mb-3">Schedule</h4>
                 <ul className="space-y-2 text-sm text-gray-600">
                   <li>• Monday - Friday</li>
-                  <li>• Morning: 8:00 AM - 12:00 PM</li>
-                  <li>• Afternoon: 1:00 PM - 5:00 PM</li>
+                  {camp.slug === 'junior-art-masterclass' && (
+                    <li className="ml-4">9am - 1pm</li>
+                  )}
                   <li>• Small class sizes (max {camp.max_capacity} students)</li>
+                  <li>• Hosted at{' '}
+                    <a 
+                      href="https://nexuswaco.com/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:text-blue-800 underline"
+                    >
+                      Nexus Waco
+                    </a>
+                  </li>
+                  <li className="ml-4">1603 Washington Ave Waco, TX 76701</li>
                 </ul>
               </div>
               
@@ -225,6 +258,9 @@ export default async function CampDetailPage({ params }: CampPageProps) {
                   <li>• All materials and software</li>
                   <li>• Expert instruction</li>
                   <li>• Take-home projects</li>
+                  {camp.slug === 'junior-art-masterclass' && (
+                    <li>• Snack provided each day</li>
+                  )}
                   <li>• Certificate of completion</li>
                 </ul>
               </div>
@@ -320,6 +356,14 @@ function getSkillsForCamp(slug: string): string[] {
       'Digital Branding & Marketing',
       'Strategic Game Analysis',
       'Industry Career Pathways'
+    ],
+    'junior-art-masterclass': [
+      'Drawing Still Life',
+      'Clay Work & Sculpture',
+      'Self Portrait Techniques',
+      'Painted Paper Collages',
+      'Color Theory & Composition',
+      'Creative Expression & Style Development'
     ]
   }
   

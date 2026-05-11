@@ -1,4 +1,4 @@
-import { CodeBracketIcon, RocketLaunchIcon, TrophyIcon, ComputerDesktopIcon, PuzzlePieceIcon } from '@heroicons/react/24/outline'
+import { CodeBracketIcon, RocketLaunchIcon, PencilIcon, TrophyIcon, ComputerDesktopIcon, PuzzlePieceIcon, PaintBrushIcon, CameraIcon, AcademicCapIcon, SparklesIcon, BriefcaseIcon } from '@heroicons/react/24/outline'
 
 // Map camp slugs to their UI properties (icons, colors, highlights)
 export const campUIConfig = {
@@ -25,6 +25,12 @@ export const campUIConfig = {
     color: 'from-orange-500 to-red-600',
     highlights: ['Advanced Deck Building', 'Tournament Strategy', 'Card Game Economics', 'Meta Analysis', 'Professional Gaming Mindset'],
     features: ['Advanced Deck Building', 'Tournament Strategy', 'Card Game Economics', 'Meta Analysis', 'Professional Gaming Mindset']
+  },
+  'junior-art-masterclass': {
+    icon: PencilIcon,
+    color: 'from-pink-500 to-rose-600',
+    highlights: ['Drawing Still Life', 'Clay Work', 'Self Portraits', 'Painted Paper Collages', 'Creative Development'],
+    features: ['Drawing Still Life', 'Clay Work', 'Self Portraits', 'Painted Paper Collages', 'Creative Development']
   }
 }
 
@@ -38,6 +44,9 @@ export interface EnhancedCamp {
   price: number
   age_range: string
   max_capacity: number
+  image_url?: string
+  instructor_bio?: string
+  instructor_photo?: string
   icon?: any
   color?: string
   highlights?: string[]
@@ -46,8 +55,21 @@ export interface EnhancedCamp {
 
 // Function to enhance camp data with UI properties
 export function enhanceCampData(camps: any[]): EnhancedCamp[] {
-  return camps.map(camp => ({
-    ...camp,
-    ...campUIConfig[camp.slug as keyof typeof campUIConfig]
-  }))
+  return camps.map(camp => {
+    const config = campUIConfig[camp.slug as keyof typeof campUIConfig]
+    
+    // Debug: log if camp config is missing
+    if (!config) {
+      console.warn(`No UI config found for camp slug: "${camp.slug}". Available slugs:`, Object.keys(campUIConfig))
+    }
+    
+    return {
+      ...camp,
+      // Use config if found, otherwise provide fallback
+      icon: config?.icon || AcademicCapIcon,
+      color: config?.color || 'from-gray-500 to-gray-600',
+      highlights: config?.highlights || [],
+      features: config?.features || []
+    }
+  })
 }

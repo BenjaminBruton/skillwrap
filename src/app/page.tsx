@@ -8,14 +8,27 @@ async function getCamps(): Promise<EnhancedCamp[]> {
     const { data: camps, error } = await supabase
       .from('camps')
       .select('*')
-      .order('created_at', { ascending: true })
 
     if (error) {
       console.error('Error fetching camps:', error)
       return []
     }
 
-    return enhanceCampData(camps || [])
+    // Custom ordering: Art, Esports, Tabletop, Entrepreneurship, Software Dev
+    const orderMap: Record<string, number> = {
+      'junior-art-masterclass': 1,
+      'esports-academy': 2,
+      'tabletop-gaming': 3,
+      'entrepreneurship-shark-tank': 4,
+      'software-dev-ai': 5
+    }
+
+    const enhancedCamps = enhanceCampData(camps || [])
+    return enhancedCamps.sort((a, b) => {
+      const orderA = orderMap[a.slug] || 999
+      const orderB = orderMap[b.slug] || 999
+      return orderA - orderB
+    })
   } catch (error) {
     console.error('Unexpected error fetching camps:', error)
     return []
@@ -75,7 +88,7 @@ export default async function HomePage() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
-              <div className="text-3xl font-bold text-blue-600 mb-2">4</div>
+              <div className="text-3xl font-bold text-blue-600 mb-2">5</div>
               <div className="text-gray-600">Specialized Camps</div>
             </div>
             <div>
@@ -83,7 +96,7 @@ export default async function HomePage() {
               <div className="text-gray-600">Sessions Available</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-purple-600 mb-2">12-20</div>
+              <div className="text-3xl font-bold text-purple-600 mb-2">10-20</div>
               <div className="text-gray-600">Max Students per Session</div>
             </div>
             <div>
@@ -107,30 +120,41 @@ export default async function HomePage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {camps.map((camp) => {
-              const IconComponent = camp.icon
               return (
-                <div key={camp.id} className="card p-6 hover:shadow-lg transition-shadow">
-                  <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${camp.color} flex items-center justify-center mb-4`}>
-                    <IconComponent className="h-6 w-6 text-white" />
+                <div key={camp.id} className="card overflow-hidden hover:shadow-lg transition-shadow">
+                  {camp.image_url ? (
+                    <div className="h-48 overflow-hidden">
+                      <img 
+                        src={camp.image_url} 
+                        alt={camp.name}
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                  ) : (
+                    <div className={`h-48 bg-gradient-to-br ${camp.color || 'from-gray-400 to-gray-600'} flex items-center justify-center`}>
+                      <span className="text-white text-xl font-bold">No Image</span>
+                    </div>
+                  )}
+                  <div className="p-6">
+                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                      {camp.name}
+                    </h3>
+                    <p className="text-gray-600 mb-4">
+                      {camp.short_description}
+                    </p>
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-sm text-gray-500">Ages {camp.age_range}</span>
+                      <span className="text-2xl font-bold text-gray-900">${camp.price}</span>
+                    </div>
+                    <Link 
+                      href={`/camps/${camp.slug}`}
+                      className="btn-primary w-full justify-center"
+                    >
+                      Learn More
+                    </Link>
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                    {camp.name}
-                  </h3>
-                  <p className="text-gray-600 mb-4">
-                    {camp.short_description}
-                  </p>
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-sm text-gray-500">Ages {camp.age_range}</span>
-                    <span className="text-2xl font-bold text-gray-900">${camp.price}</span>
-                  </div>
-                  <Link 
-                    href={`/camps/${camp.slug}`}
-                    className="btn-primary w-full justify-center"
-                  >
-                    Learn More
-                  </Link>
                 </div>
               )
             })}
