@@ -26,12 +26,13 @@ export const campUIConfig = {
     highlights: ['Advanced Deck Building', 'Tournament Strategy', 'Card Game Economics', 'Meta Analysis', 'Professional Gaming Mindset'],
     features: ['Advanced Deck Building', 'Tournament Strategy', 'Card Game Economics', 'Meta Analysis', 'Professional Gaming Mindset']
   },
-  'junior-art-masterclass': {
-    icon: PencilIcon,
-    color: 'from-pink-500 to-rose-600',
-    highlights: ['Drawing Still Life', 'Clay Work', 'Self Portraits', 'Painted Paper Collages', 'Creative Development'],
-    features: ['Drawing Still Life', 'Clay Work', 'Self Portraits', 'Painted Paper Collages', 'Creative Development']
-  }
+  // COMMENTED OUT - hiding art camp temporarily
+  // 'junior-art-masterclass': {
+  //   icon: PencilIcon,
+  //   color: 'from-pink-500 to-rose-600',
+  //   highlights: ['Drawing Still Life', 'Clay Work', 'Self Portraits', 'Painted Paper Collages', 'Creative Development'],
+  //   features: ['Drawing Still Life', 'Clay Work', 'Self Portraits', 'Painted Paper Collages', 'Creative Development']
+  // }
 }
 
 // Enhanced camp type that includes UI properties

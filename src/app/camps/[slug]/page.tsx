@@ -140,6 +140,11 @@ async function getCampData(slug: string) {
 }
 
 export default async function CampDetailPage({ params }: CampPageProps) {
+  // TEMPORARILY HIDE JUNIOR ART MASTERCLASS
+  if (params.slug === 'junior-art-masterclass') {
+    notFound()
+  }
+  
   const camp = await getCampData(params.slug)
 
   if (!camp) {

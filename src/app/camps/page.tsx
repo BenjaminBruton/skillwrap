@@ -17,13 +17,15 @@ async function getCamps(): Promise<EnhancedCamp[]> {
     // Custom ordering: Esports, Junior Art, Tabletop, Entrepreneurship, AI Developer
     const orderMap: Record<string, number> = {
       'esports-academy': 1,
-      'junior-art-masterclass': 2,
+      // 'junior-art-masterclass': 2,  // COMMENTED OUT - hiding art camp temporarily
       'tabletop-gaming': 3,
       'entrepreneurship-shark-tank': 4,
       'software-dev-ai': 5
     }
 
     const enhancedCamps = enhanceCampData(camps || [])
+      .filter(camp => camp.slug !== 'junior-art-masterclass') // Filter out art camp
+    
     return enhancedCamps.sort((a, b) => {
       const orderA = orderMap[a.slug] || 999
       const orderB = orderMap[b.slug] || 999
