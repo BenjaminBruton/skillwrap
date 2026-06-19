@@ -47,7 +47,20 @@ async function getSessions() {
   }
 }
 
-function getStatusColor(status: string, currentBookings?: number, maxCapacity?: number) {
+function isSessionPast(endDate: string): boolean {
+  const today = new Date()
+  today.setHours(0, 0, 0, 0) // Reset to start of day
+  const sessionEnd = new Date(endDate)
+  sessionEnd.setHours(0, 0, 0, 0)
+  return sessionEnd < today
+}
+
+function getStatusColor(status: string, currentBookings?: number, maxCapacity?: number, endDate?: string) {
+  // Check if session is past
+  if (endDate && isSessionPast(endDate)) {
+    return 'bg-gray-100 text-gray-800'
+  }
+  
   // If session is full, show red regardless of database status
   const isFull = (currentBookings ?? 0) >= (maxCapacity ?? 0)
   if (isFull) {
@@ -66,7 +79,12 @@ function getStatusColor(status: string, currentBookings?: number, maxCapacity?: 
   }
 }
 
-function getStatusText(status: string, currentBookings: number, maxCapacity: number) {
+function getStatusText(status: string, currentBookings: number, maxCapacity: number, endDate?: string) {
+  // Check if session is past
+  if (endDate && isSessionPast(endDate)) {
+    return 'Closed'
+  }
+  
   // If session is full, show "Closed" regardless of database status
   const isFull = currentBookings >= maxCapacity
   if (isFull) {
@@ -213,16 +231,23 @@ export default async function CampCalendarPage() {
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(session.status, session.current_bookings, session.max_capacity)}`}>
-                          {getStatusText(session.status, session.current_bookings, session.max_capacity)}
+                        <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(session.status, session.current_bookings, session.max_capacity, session.end_date)}`}>
+                          {getStatusText(session.status, session.current_bookings, session.max_capacity, session.end_date)}
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         {(() => {
+                          const isPast = isSessionPast(session.end_date)
                           const isFull = session.current_bookings >= session.max_capacity
-                          const canBook = session.camps?.slug && session.status === 'open' && !isFull
+                          const canBook = session.camps?.slug && session.status === 'open' && !isFull && !isPast
                           
-                          if (canBook) {
+                          if (isPast || isFull) {
+                            return (
+                              <span className="text-gray-600 font-medium">
+                                Closed
+                              </span>
+                            )
+                          } else if (canBook) {
                             return (
                               <Link
                                 href={`/camps/${session.camps.slug}`}
@@ -230,12 +255,6 @@ export default async function CampCalendarPage() {
                               >
                                 Book Now
                               </Link>
-                            )
-                          } else if (isFull) {
-                            return (
-                              <span className="text-red-600 font-medium">
-                                Closed
-                              </span>
                             )
                           } else {
                             return (
@@ -260,8 +279,8 @@ export default async function CampCalendarPage() {
                     <h3 className="text-lg font-semibold text-gray-900">
                       {session.camps?.name || 'Unknown Camp'}
                     </h3>
-                    <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(session.status, session.current_bookings, session.max_capacity)}`}>
-                      {getStatusText(session.status, session.current_bookings, session.max_capacity)}
+                    <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(session.status, session.current_bookings, session.max_capacity, session.end_date)}`}>
+                      {getStatusText(session.status, session.current_bookings, session.max_capacity, session.end_date)}
                     </span>
                   </div>
                   
@@ -294,10 +313,20 @@ export default async function CampCalendarPage() {
                   </div>
 
                   {(() => {
+                    const isPast = isSessionPast(session.end_date)
                     const isFull = session.current_bookings >= session.max_capacity
-                    const canBook = session.camps?.slug && session.status === 'open' && !isFull
+                    const canBook = session.camps?.slug && session.status === 'open' && !isFull && !isPast
                     
-                    if (canBook) {
+                    if (isPast || isFull) {
+                      return (
+                        <button
+                          disabled
+                          className="w-full py-2 px-4 bg-gray-300 text-gray-600 rounded-lg cursor-not-allowed font-medium"
+                        >
+                          Closed
+                        </button>
+                      )
+                    } else if (canBook) {
                       return (
                         <Link
                           href={`/camps/${session.camps.slug}`}
@@ -305,15 +334,6 @@ export default async function CampCalendarPage() {
                         >
                           Book This Session
                         </Link>
-                      )
-                    } else if (isFull) {
-                      return (
-                        <button
-                          disabled
-                          className="w-full py-2 px-4 bg-red-300 text-red-700 rounded-lg cursor-not-allowed font-medium"
-                        >
-                          Closed
-                        </button>
                       )
                     } else {
                       return (
