@@ -18,7 +18,7 @@ async function getCamps(): Promise<EnhancedCamp[]> {
     const orderMap: Record<string, number> = {
       'esports-academy': 1,
       // 'junior-art-masterclass': 2,  // COMMENTED OUT - hiding art camp temporarily
-      'tabletop-gaming': 3,
+      'trading-card-gaming': 3,
       'entrepreneurship-shark-tank': 4,
       'software-dev-ai': 5
     }

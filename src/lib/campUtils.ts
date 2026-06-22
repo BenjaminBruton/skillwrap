@@ -20,7 +20,7 @@ export const campUIConfig = {
     highlights: ['Tournament Organization', 'Broadcast Production', 'Team Management', 'Digital Branding', 'Strategic Analysis'],
     features: ['Tournament Organization', 'Broadcast Production', 'Team Management', 'Digital Branding', 'Strategic Analysis']
   },
-  'tabletop-gaming': {
+  'trading-card-gaming': {
     icon: PuzzlePieceIcon,
     color: 'from-orange-500 to-red-600',
     highlights: ['Advanced Deck Building', 'Tournament Strategy', 'Card Game Economics', 'Meta Analysis', 'Professional Gaming Mindset'],

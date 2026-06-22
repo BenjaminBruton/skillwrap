@@ -14,11 +14,11 @@ async function getCamps(): Promise<EnhancedCamp[]> {
       return []
     }
 
-    // Custom ordering: Esports, Tabletop, Entrepreneurship, Software Dev
+    // Custom ordering: Esports, Trading Card, Entrepreneurship, Software Dev
     const orderMap: Record<string, number> = {
       // 'junior-art-masterclass': 1,  // COMMENTED OUT - hiding art camp temporarily
       'esports-academy': 2,
-      'tabletop-gaming': 3,
+      'trading-card-gaming': 3,
       'entrepreneurship-shark-tank': 4,
       'software-dev-ai': 5
     }

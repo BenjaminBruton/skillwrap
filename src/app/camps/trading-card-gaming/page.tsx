@@ -16,10 +16,10 @@ async function getCampData() {
     }
     
     const camps: Camp[] = await campsResponse.json()
-    const camp = camps.find(c => c.slug === 'tabletop-gaming')
+    const camp = camps.find(c => c.slug === 'trading-card-gaming')
     
     if (!camp) {
-      throw new Error('Tabletop gaming camp not found')
+      throw new Error('Trading card gaming camp not found')
     }
 
     // Fetch sessions from the API
@@ -33,14 +33,14 @@ async function getCampData() {
     
     const sessions: Session[] = await sessionsResponse.json()
     
-    // Filter sessions for tabletop-gaming camp
-    const tabletopSessions = sessions.filter(session =>
-      session.camp_id === 'tabletop-gaming' ||
-      (session.camp && session.camp.slug === 'tabletop-gaming')
+    // Filter sessions for trading-card-gaming camp
+    const tradingCardSessions = sessions.filter(session =>
+      session.camp_id === 'trading-card-gaming' ||
+      (session.camp && session.camp.slug === 'trading-card-gaming')
     )
 
     // Add availability info to sessions
-    const sessionsWithAvailability = tabletopSessions.map(session => ({
+    const sessionsWithAvailability = tradingCardSessions.map(session => ({
       ...session,
       available_spots: session.max_capacity - session.current_bookings,
       is_full: session.current_bookings >= session.max_capacity
@@ -59,9 +59,9 @@ async function getCampData() {
     // Return fallback data if API fails
     return {
       camp: {
-        id: 'tabletop-gaming',
+        id: 'trading-card-gaming',
         name: 'Trading Card Gaming: Collector to Competitor',
-        slug: 'tabletop-gaming',
+        slug: 'trading-card-gaming',
         description: 'Transform your passion for card games into competitive mastery! Learn advanced strategies, deck building, tournament play, and the business side of competitive gaming. Perfect for aspiring professional players and collectors who want to understand the deeper mechanics of their favorite games and develop the skills needed to compete at higher levels.',
         short_description: 'Transform your passion for card games into competitive mastery',
         age_range: '10-18',
