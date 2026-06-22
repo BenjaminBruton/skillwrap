@@ -66,7 +66,7 @@ async function getCampData() {
         short_description: 'Transform your passion for card games into competitive mastery',
         age_range: '10-18',
         max_capacity: 20,
-        price: 225, // Updated fallback price
+        price: 150, // Updated fallback price
         image_url: '',
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString()

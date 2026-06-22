@@ -52,7 +52,7 @@ const mockCamps = {
     short_description: 'Learn the business side of competitive gaming',
     age_range: '12-18',
     max_capacity: 20,
-    price: 275,
+    price: 150,
     image_url: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
     created_at: '2024-01-01T00:00:00Z',
     updated_at: '2024-01-01T00:00:00Z'
