@@ -22,7 +22,7 @@ const faqData: FAQItem[] = [
   {
     id: 'age-requirements',
     question: 'What are the age requirements for each camp?',
-    answer: 'Our camps are designed for different age groups: Software Development camps (AI-Powered Productivity) are for ages 13-18, while Entrepreneurship, Esports Academy, and Tabletop Gaming are for ages 10-18. We group students appropriately within these ranges to ensure optimal learning experiences.',
+    answer: 'Our camps are designed for different age groups: Software Development camps (AI-Powered Productivity) are for ages 13-18, while Entrepreneurship, Esports Academy, and Trading Card Gaming are for ages 10-18. We group students appropriately within these ranges to ensure optimal learning experiences.',
     category: 'General'
   },
   {
@@ -42,7 +42,7 @@ const faqData: FAQItem[] = [
   {
     id: 'pricing',
     question: 'How much do the camps cost?',
-    answer: 'Software Development camps (AI-Powered Productivity) are $300 per week. Entrepreneurship, Esports Academy, and Tabletop Gaming camps are $275 per week. All materials, equipment, and instruction are included in the price.',
+    answer: 'Software Development camps (AI-Powered Productivity) are $300 per week. Entrepreneurship, Esports Academy, and Trading Card Gaming camps are $150 per week. All materials, equipment, and instruction are included in the price.',
     category: 'Enrollment'
   },
   {

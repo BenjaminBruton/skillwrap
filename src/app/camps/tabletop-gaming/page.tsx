@@ -60,7 +60,7 @@ async function getCampData() {
     return {
       camp: {
         id: 'tabletop-gaming',
-        name: 'Tabletop Card Gaming: Collector to Competitor',
+        name: 'Trading Card Gaming: Collector to Competitor',
         slug: 'tabletop-gaming',
         description: 'Transform your passion for card games into competitive mastery! Learn advanced strategies, deck building, tournament play, and the business side of competitive gaming. Perfect for aspiring professional players and collectors who want to understand the deeper mechanics of their favorite games and develop the skills needed to compete at higher levels.',
         short_description: 'Transform your passion for card games into competitive mastery',
