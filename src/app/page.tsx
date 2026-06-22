@@ -14,9 +14,9 @@ async function getCamps(): Promise<EnhancedCamp[]> {
       return []
     }
 
-    // Custom ordering: Art, Esports, Tabletop, Entrepreneurship, Software Dev
+    // Custom ordering: Esports, Tabletop, Entrepreneurship, Software Dev
     const orderMap: Record<string, number> = {
-      'junior-art-masterclass': 1,
+      // 'junior-art-masterclass': 1,  // COMMENTED OUT - hiding art camp temporarily
       'esports-academy': 2,
       'tabletop-gaming': 3,
       'entrepreneurship-shark-tank': 4,
@@ -24,6 +24,8 @@ async function getCamps(): Promise<EnhancedCamp[]> {
     }
 
     const enhancedCamps = enhanceCampData(camps || [])
+      .filter(camp => camp.slug !== 'junior-art-masterclass') // Filter out art camp
+    
     return enhancedCamps.sort((a, b) => {
       const orderA = orderMap[a.slug] || 999
       const orderB = orderMap[b.slug] || 999
@@ -88,7 +90,7 @@ export default async function HomePage() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
-              <div className="text-3xl font-bold text-blue-600 mb-2">5</div>
+              <div className="text-3xl font-bold text-blue-600 mb-2">4</div>
               <div className="text-gray-600">Specialized Camps</div>
             </div>
             <div>
